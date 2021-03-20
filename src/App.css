@@ -1,38 +1,90 @@
-.App {
+/* body {
+  background: #1e555c;
+  color: white;
+  font-size: 30px;
   text-align: center;
 }
+  #container {
+    display: flex;
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+  }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
+    .main-title {
+      font-size: 50px;
+      margin-bottom: 20px;
+    }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    .length-control {
+      width: 250px;
+    }
+    button {
+      background: none;
+      outline: none;
+      border: none;
+      color: white;
+      cursor: pointer;
+    }
+    .btn-level,
+    .length-control {
+      display: inline-block;
+    }
+      .btn-level:nth-child(3) {
+        width: 40px;
+      }
+
+    
+    .timer {
+      border: 7px solid #13353a;
+      margin: 20px auto 10px auto;
+      width: 270px;
+      height: 160px;
+      border-radius: 50px;
+      position: relative;
+    }
+      .timer-wrapper {
+        position: absolute;
+        width: 190px;
+        height: 110px;
+        left: 50%;
+        top: 50%;
+        margin-left: -95px;
+        margin-top: -57px;
+      }
+
+      #time-left {
+        font-family: digital;
+        font-size: 80px;
+      }
+      .timer-control button:active {
+        color: #13353a;
+      }
+    
+  
+
+
+@media screen and (max-width: 500px) {
+  #container {
+    transform: scale(0.8);
+    -webkit-transform: scale(0.8);
+    -moz-transform: scale(0.8);
+    -ms-transform: scale(0.8);
+    -o-transform: scale(0.8);
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.author {
+  text-align: center;
+  font-family: Share Tech Mono, sans;
+  margin-top: 15px;
+  font-size: 14px;
+  color: #a50d0d;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
+  a {
+    text-decoration: none;
+    color: #00264d;
+    line-height: 26px;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
+ */
