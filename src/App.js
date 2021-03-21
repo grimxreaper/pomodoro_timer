@@ -10,6 +10,8 @@ class App extends React.Component {
       break_length: 5,
       session_length: 25,
       time_left: "25:00",
+      minutes: 25,
+      seconds: 0,
     };
   }
 
@@ -64,6 +66,9 @@ class App extends React.Component {
     }
   };
 
+
+
+
   start_stop = () => {
     console.log("then this WORKS!");
     this.setState({
@@ -71,6 +76,9 @@ class App extends React.Component {
       time_left: this.state.session_length + ":00",
     });
   };
+
+
+
   reset = () => {
     this.setState({
       break_length: 5,
@@ -78,12 +86,15 @@ class App extends React.Component {
     });
   };
 
+
+
   render() {
-    const { break_length, session_length, time_left } = this.props;
+    const { break_length, session_length, time_left, minutes, seconds } = this.state;
     return (
       <div>
+        <h1>Pomodoro Timer</h1>
         <div id="timer-label">
-          <h1>Pomodoro Timer</h1>
+          <p> Session In Progress </p>
         </div>
 
         {/* decrement */}
@@ -103,7 +114,12 @@ class App extends React.Component {
 
         <div id="break_length">{this.state.break_length}</div>
         <div id="session_length">{this.state.session_length}</div>
-        <div id="time_left">{this.state.time_left}</div>
+        <div id="time_left">{this.state.time_left}
+        
+        <h4>Time Left: </h4>
+        
+        </div>
+
 
         <button id="start_stop" onClick={this.onClick}>
           {" "}
