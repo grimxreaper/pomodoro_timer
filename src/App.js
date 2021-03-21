@@ -15,6 +15,27 @@ class App extends React.Component {
     }
   }
 
+
+  onClick = (button) => {
+    const id = button.target.id;
+    console.log(id)
+    if (id === "start_stop") {
+      console.log("FIRST this WORKS!")
+      this.start_stop()
+    }
+    else if (id === "break-decrement") {
+      this.break_decrement()
+    }
+    else if (id === "break-increment") {
+      this.break_increment()
+    }
+    else if (id === "session-decrement"){
+      this.session_decrement()
+    }
+
+
+  }
+
   break_decrement = () => {
     this.setState({
       break_length: this.state.break_length - 1
@@ -41,6 +62,7 @@ class App extends React.Component {
 
 
   start_stop = () => {
+    console.log("this WORKS!")
     this.setState({
       // fix this
       time_left: this.state.session_length + ":00"
@@ -71,7 +93,7 @@ class App extends React.Component {
         <div id="session-length">25</div>
         <div id="time-left">mm:ss</div>
 
-        <button id="start_stop"> Start/Stop</button>
+        <button id="start_stop" onClick={this.onClick}> Start/Stop</button>
         <button id="reset"> Reset </button>
 
 
