@@ -9,7 +9,6 @@ class App extends React.Component {
     this.state = {
       break_length: 5,
       session_length: 25,
-      time_left: "25:00",
       minutes: 25,
       seconds: 0,
       cycle: "Session",
@@ -57,6 +56,7 @@ class App extends React.Component {
     if (this.state.session_length > 0)
       this.setState({
         session_length: this.state.session_length - 1,
+        minutes: this.state.session_length - 1
       });
   };
 
@@ -64,6 +64,7 @@ class App extends React.Component {
     if (this.state.session_length < 60) {
       this.setState({
         session_length: this.state.session_length + 1,
+        minutes: this.state.session_length + 1
       });
     }
   };
@@ -85,6 +86,7 @@ class App extends React.Component {
         if (seconds === 0) {
           if (minutes === 0) {
             clearInterval(this.myInterval);
+
           } else {
             this.setState(({ minutes }) => ({
               minutes: minutes - 1,
@@ -103,6 +105,9 @@ class App extends React.Component {
     }
   };
 
+
+  
+
   reset = () => {
     this.setState({
       break_length: 5,
@@ -112,9 +117,9 @@ class App extends React.Component {
     });
   };
 
-  playSound = () => {
-    this.audio.play();
-  };
+  // playSound = () => {
+  //   this.audio.play();
+  // };
 
   render() {
     const {
