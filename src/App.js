@@ -12,6 +12,8 @@ class App extends React.Component {
       time_left: "25:00",
       minutes: 25,
       seconds: 0,
+      cycle: "Session",
+      countdown: false,
     };
 
     this.audio = React.createRef();
@@ -67,25 +69,38 @@ class App extends React.Component {
   };
 
   start_stop = () => {
-    this.myInterval = setInterval(() => {
-      const { seconds, minutes } = this.state;
+    if (this.state.countdown === false) {
+      this.setState({
+        countdown: true,
+      });
 
-      if (seconds > 0) {
-        this.setState(({ seconds }) => ({
-          seconds: seconds - 1,
-        }));
-      }
-      if (seconds === 0) {
-        if (minutes === 0) {
-          clearInterval(this.myInterval);
-        } else {
-          this.setState(({ minutes }) => ({
-            minutes: minutes - 1,
-            seconds: 59,
+      this.myInterval = setInterval(() => {
+        const { seconds, minutes } = this.state;
+
+        if (seconds > 0) {
+          this.setState(({ seconds }) => ({
+            seconds: seconds - 1,
           }));
         }
+        if (seconds === 0) {
+          if (minutes === 0) {
+            clearInterval(this.myInterval);
+          } else {
+            this.setState(({ minutes }) => ({
+              minutes: minutes - 1,
+              seconds: 59,
+            }));
+          }
+        }
+      }, 1000);
+    } else if (this.state.countdown === true) {
+        this.setState({
+          countdown: false,
+        });
+      {
+        clearInterval(this.myInterval);
       }
-    }, 1000);
+    }
   };
 
   reset = () => {
