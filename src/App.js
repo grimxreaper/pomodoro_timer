@@ -13,6 +13,8 @@ class App extends React.Component {
       minutes: 25,
       seconds: 0,
     };
+
+    this.audio = React.createRef();
   }
 
   onClick = (button) => {
@@ -88,7 +90,9 @@ class App extends React.Component {
     });
   };
 
-
+  playSound = () => {
+    this.audio.play();
+  }
 
   render() {
     const { break_length, session_length, time_left, minutes, seconds } = this.state;
@@ -132,6 +136,13 @@ class App extends React.Component {
           {" "}
           Reset{" "}
         </button>
+
+        <audio
+        src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
+        id="beep" ref={this.audio}
+
+        />
+
       </div>
     );
   }
