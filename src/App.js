@@ -116,7 +116,7 @@ class App extends React.Component {
         <div id="session_length">{this.state.session_length}</div>
         <div id="time_left">{this.state.time_left}
         
-        <h4>Time Left: </h4>
+        <h4>Time Left: { minutes } : { seconds } </h4>
         
         </div>
 
