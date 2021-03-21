@@ -12,8 +12,8 @@ class App extends React.Component {
       session_length: 25,
       
     }
-
   }
+
   break_decrement = () => {
     this.setState({
       break_length: this.state.break_length - 1
@@ -67,12 +67,6 @@ class App extends React.Component {
 
         <button id="start_stop"> //add onClick </button>
         <button id="reset"> </button>
-        //When I click the element with the id of reset,
-        //any running timer should be stopped, the value
-        //within id="break-length" should return to 5,
-        //the value within id="session-length" should return to 25,
-        //and the element with id="time-left" should reset to its
-        //default state.
 
 
       </div>
