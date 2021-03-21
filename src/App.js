@@ -30,11 +30,9 @@ class App extends React.Component {
       this.session_decrement();
     } else if (id === "session_increment") {
       this.session_increment();
-    } else if (id === "reset"){
-      this.reset()
+    } else if (id === "reset") {
+      this.reset();
     }
-
-
   };
 
   break_decrement = () => {
@@ -68,18 +66,27 @@ class App extends React.Component {
     }
   };
 
-
-
-
   start_stop = () => {
-    // console.log("then this WORKS!");
-    this.setState({
-      // fix this
-      time_left: this.state.session_length + ":00",
-    });
+    this.myInterval = setInterval(() => {
+      const { seconds, minutes } = this.state;
+
+      if (seconds > 0) {
+        this.setState(({ seconds }) => ({
+          seconds: seconds - 1,
+        }));
+      }
+      if (seconds === 0) {
+        if (minutes === 0) {
+          clearInterval(this.myInterval);
+        } else {
+          this.setState(({ minutes }) => ({
+            minutes: minutes - 1,
+            seconds: 59,
+          }));
+        }
+      }
+    }, 1000);
   };
-
-
 
   reset = () => {
     this.setState({
@@ -92,10 +99,16 @@ class App extends React.Component {
 
   playSound = () => {
     this.audio.play();
-  }
+  };
 
   render() {
-    const { break_length, session_length, time_left, minutes, seconds } = this.state;
+    const {
+      break_length,
+      session_length,
+      time_left,
+      minutes,
+      seconds,
+    } = this.state;
     return (
       <div>
         <h1>Pomodoro Timer</h1>
@@ -120,12 +133,16 @@ class App extends React.Component {
 
         <div id="break_length">{this.state.break_length}</div>
         <div id="session_length">{this.state.session_length}</div>
-        <div id="time_left">{this.state.time_left}
-        
-        { minutes === 0 && seconds === 0
-        ? <h4> Finished </h4>
-        : <h4>Time Left: { minutes }:{ seconds < 10 ? `0${ seconds }` : seconds } </h4>
-        } 
+        <div id="time_left">
+          {this.state.time_left}
+
+          {minutes === 0 && seconds === 0 ? (
+            <h4> Finished </h4>
+          ) : (
+            <h4>
+              Time Left: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
+            </h4>
+          )}
         </div>
 
         <button id="start_stop" onClick={this.onClick}>
@@ -138,11 +155,10 @@ class App extends React.Component {
         </button>
 
         <audio
-        src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
-        id="beep" ref={this.audio}
-
+          src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
+          id="beep"
+          ref={this.audio}
         />
-
       </div>
     );
   }
