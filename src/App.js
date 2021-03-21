@@ -11,7 +11,7 @@ class App extends React.Component {
       session_length: 25,
       minutes: 25,
       seconds: 0,
-      cycle: "Session",
+      cycle: "session",
       countdown: false,
     };
 
@@ -23,13 +23,13 @@ class App extends React.Component {
     console.log(id);
     if (id === "start_stop") {
       this.start_stop();
-    } else if (id === "break_decrement") {
+    } else if (id === "break-decrement") {
       this.break_decrement();
-    } else if (id === "break_increment") {
+    } else if (id === "break-increment") {
       this.break_increment();
-    } else if (id === "session_decrement") {
+    } else if (id === "session-decrement") {
       this.session_decrement();
-    } else if (id === "session_increment") {
+    } else if (id === "session-increment") {
       this.session_increment();
     } else if (id === "reset") {
       this.reset();
@@ -114,6 +114,8 @@ class App extends React.Component {
       session_length: 25,
       minutes: 25,
       seconds: 0,
+      cycle: "session",
+      countdown: false,
     });
   };
 
@@ -137,25 +139,27 @@ class App extends React.Component {
         </div>
 
         {/* decrement */}
-        <button id="break_decrement" onClick={this.onClick}>
+        <button id="break-decrement" onClick={this.onClick}>
           Decrease Break Length
         </button>
-        <button id="session_decrement" onClick={this.onClick}>
+        <button id="session-decrement" onClick={this.onClick}>
           Decrease Session Length
         </button>
         {/* increment */}
-        <button id="break_increment" onClick={this.onClick}>
+        <button id="break-increment" onClick={this.onClick}>
           Increase Break Length
         </button>
-        <button id="session_increment" onClick={this.onClick}>
+        <button id="session-increment" onClick={this.onClick}>
           Increase Session Length
         </button>
 
-        <div id="break_length">{this.state.break_length}</div>
-        <div id="session_length">{this.state.session_length}</div>
-        <div id="time_left">
-          {this.state.time_left}
-
+        <div id="break-length">{this.state.break_length} 
+        <div id="break-label">Break Length</div>
+        </div>
+        <div id="session-length">{this.state.session_length} 
+        <div id="session-label">Session Length</div>
+        </div>
+        <div id="time-left">
           {minutes === 0 && seconds === 0 ? (
             <h4> Finished </h4>
           ) : (
