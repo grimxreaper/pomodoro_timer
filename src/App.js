@@ -9,7 +9,7 @@ class App extends React.Component {
 
     this.state = {
       break_length: 5,
-      session_length: 25,
+      session_length: 59,
       time_left: "25:00"
       
     }
@@ -23,29 +23,38 @@ class App extends React.Component {
       console.log("FIRST this WORKS!")
       this.start_stop()
     }
-    else if (id === "break-decrement") {
+    else if (id === "break_decrement") {
+      console.log("FIRST BREAKS HERE")
       this.break_decrement()
     }
-    else if (id === "break-increment") {
+    else if (id === "break_increment") {
       this.break_increment()
     }
-    else if (id === "session-decrement"){
+    else if (id === "session_decrement"){
       this.session_decrement()
     }
-
+    else if (id === "session_increment"){
+      this.session_increment()
+    }
 
   }
 
   break_decrement = () => {
-    this.setState({
-      break_length: this.state.break_length - 1
-    })
+    // console.log("THEN WE BREAK HERE")
+    // console.log(this.state.break_length)
+    if (this.state.break_length > 0) {
+      this.setState({
+        break_length: this.state.break_length - 1
+      })
+    }
   }
 
   break_increment = () => {
+    if (this.state.break_length < 60) {
     this.setState({
       break_length: this.state.break_length + 1
     })
+  }
   }
 
   session_decrement = () => {
@@ -55,14 +64,22 @@ class App extends React.Component {
   }
 
   session_increment = () => {
+    if (this.state.session_length < 60) {
     this.setState({
       session_length: this.state.session_length + 1
     })
   }
+    else if (this.state.break_length === 60) {
+      this.setState({
+        session_length: 60
+      })
+    }
+  
+  }
 
 
   start_stop = () => {
-    console.log("this WORKS!")
+    console.log("then this WORKS!")
     this.setState({
       // fix this
       time_left: this.state.session_length + ":00"
@@ -76,6 +93,7 @@ class App extends React.Component {
   }
 
   render(){
+    const { break_length, session_length, time_left} = this.props;
     return (
       <div>
         <div id="timer-label">
@@ -83,18 +101,18 @@ class App extends React.Component {
         </div>
 
         {/* decrement */}
-        <button id="break-decrement">Decrease Break Length</button>
-        <button id="session-decrement">Decrease Session Length</button>
+        <button id="break_decrement" onClick={this.onClick}>Decrease Break Length</button>
+        <button id="session_decrement" onClick={this.onClick}>Decrease Session Length</button>
         {/* increment */}
-        <button id="break-increment">Increase Break Length</button>
-        <button id="session-increment">Increase Session Length</button>
+        <button id="break_increment" onClick={this.onClick}>Increase Break Length</button>
+        <button id="session_increment" onClick={this.onClick}>Increase Session Length</button>
 
-        <div id="break-length">5</div>
-        <div id="session-length">25</div>
-        <div id="time-left">mm:ss</div>
+        <div id="break_length">{this.state.break_length}</div>
+        <div id="session_length">{this.state.session_length}</div>
+        <div id="time_left">{this.state.time_left}</div>
 
         <button id="start_stop" onClick={this.onClick}> Start/Stop</button>
-        <button id="reset"> Reset </button>
+        <button id="reset" onClick={this.onClick}> Reset </button>
 
 
       </div>
