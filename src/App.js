@@ -30,7 +30,11 @@ class App extends React.Component {
       this.session_decrement();
     } else if (id === "session_increment") {
       this.session_increment();
+    } else if (id === "reset"){
+      this.reset()
     }
+
+
   };
 
   break_decrement = () => {
@@ -83,6 +87,8 @@ class App extends React.Component {
     this.setState({
       break_length: 5,
       session_length: 25,
+      minutes: 25,
+      seconds: 0,
     });
   };
 
