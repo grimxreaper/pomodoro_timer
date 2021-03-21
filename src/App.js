@@ -19,10 +19,8 @@ class App extends React.Component {
     const id = button.target.id;
     console.log(id);
     if (id === "start_stop") {
-      console.log("FIRST this WORKS!");
       this.start_stop();
     } else if (id === "break_decrement") {
-      console.log("FIRST BREAKS HERE");
       this.break_decrement();
     } else if (id === "break_increment") {
       this.break_increment();
@@ -38,8 +36,6 @@ class App extends React.Component {
   };
 
   break_decrement = () => {
-    // console.log("THEN WE BREAK HERE")
-    // console.log(this.state.break_length)
     if (this.state.break_length > 0) {
       this.setState({
         break_length: this.state.break_length - 1,
@@ -74,7 +70,7 @@ class App extends React.Component {
 
 
   start_stop = () => {
-    console.log("then this WORKS!");
+    // console.log("then this WORKS!");
     this.setState({
       // fix this
       time_left: this.state.session_length + ":00",
@@ -122,10 +118,11 @@ class App extends React.Component {
         <div id="session_length">{this.state.session_length}</div>
         <div id="time_left">{this.state.time_left}
         
-        <h4>Time Left: { minutes } : { seconds } </h4>
-        
+        { minutes === 0 && seconds === 0
+        ? <h4> Finished </h4>
+        : <h4>Time Left: { minutes }:{ seconds < 10 ? `0${ seconds }` : seconds } </h4>
+        } 
         </div>
-
 
         <button id="start_stop" onClick={this.onClick}>
           {" "}
