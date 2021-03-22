@@ -122,7 +122,6 @@ class App extends React.Component {
 
         this.setState({
           break_length: this.state.break_length - 1,
-          minutes: this.state.break_length - 1
         })
       }, 1000);
 
