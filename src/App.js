@@ -14,7 +14,8 @@ class App extends React.Component {
       cycle: "session",
       countdown: false,
     };
-
+    this.start_break = this.start_break.bind(this);
+    this.start_stop = this.start_stop.bind(this);
     this.audio = React.createRef();
   }
 
@@ -200,7 +201,7 @@ class App extends React.Component {
           )}
         </div>
 
-        <button id="start_stop" onClick={this.onClick}>
+        <button id="start_stop" onClick={this.onClick} onClick={this.start_stop.bind(this)}>
           {" "}
           Start/Stop
         </button>
