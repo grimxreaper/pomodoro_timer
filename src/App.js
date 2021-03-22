@@ -111,9 +111,9 @@ class App extends React.Component {
   };
 
   start_break = () => {
+    console.log(this.state.countdown)
+
     if (this.state.cycle === "break") {
-      // const display = parent.parentNode; 
-      // display.querySelector('h2').innerText = `break time`;
       this.breakTimer = setInterval(() => {
         const { seconds, minutes, break_length } = this.state;
 
@@ -124,21 +124,25 @@ class App extends React.Component {
             seconds: seconds - 1,
           }));
         }
+        if (seconds === 0 && minutes > 0) {
+          this.setState(({minutes}) => ({
+            minutes: minutes - 1
+          }));
+        }
 
         if (seconds === 0) {
-          if (minutes === 0) {
+          if (break_length === 0) {
             console.log(break_length);
+            clearInterval(this.break_Timer)
+          }
+          else {
+            console.log('in else block 333');
             this.setState({
-              minutes: break_length - 1, //I think this line isn't rendering
-              seconds: 59,
+              minutes: break_length - 1,
+              seconds: 59, //it is setting seconds equal to 59 instead of decrementing
+              //the minutes
             });
           }
-          // } else {
-          //   this.setState({
-          //     minutes: break_length - 1,
-          //     seconds: 59,
-          //   });
-          // }
         }
       }, 1000);
     }
