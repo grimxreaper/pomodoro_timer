@@ -87,6 +87,7 @@ class App extends React.Component {
           if (minutes === 0) {
             if (this.state.cycle === "session") {
               this.setState({ cycle: "break" });
+              console.log('here 1')
               this.start_break()
               clearInterval(this.myInterval);
 
@@ -104,6 +105,8 @@ class App extends React.Component {
         countdown: false,
       });
       {
+        console.log('here 2')
+        this.start_break()
         clearInterval(this.myInterval);
       }
     }
@@ -187,7 +190,9 @@ class App extends React.Component {
         </div>
         <div id="time-left">
           {minutes === 0 && seconds === 0 ? (
-            <h4> Finished </h4>
+            <h4> 
+              Break time: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
+            </h4>
           ) : (
             <h4>
               Time Left: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
