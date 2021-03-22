@@ -16,26 +16,26 @@ class App extends React.Component {
       cycle: "session",
       countdown: false,
     };
-    this.start_break = this.start_break.bind(this);
-    this.start_stop = this.start_stop.bind(this);
-    // this.audio = React.createRef();
   }
-  audio = new Audio("https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav")
+  audio = new Audio(
+    "https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
+  );
 
   componentDidMount() {
-    this.audio.addEventListener('ended', () => this.setState({ play: false }));
+    this.audio.addEventListener("ended", () => this.setState({ play: false }));
   }
 
   componentWillUnmount() {
-    this.audio.removeEventListener('ended', () => this.setState({ play: false }));  
+    this.audio.removeEventListener("ended", () =>
+      this.setState({ play: false })
+    );
   }
 
   togglePlay = () => {
     this.setState({ play: !this.state.play }, () => {
       this.state.play ? this.audio.play() : this.audio.pause();
     });
-  }
-
+  };
 
   onClick = (button) => {
     const id = button.target.id;
@@ -89,7 +89,7 @@ class App extends React.Component {
   };
 
   start_stop = () => {
-    document.getElementById("mainLabel").innerHTML="Session"
+    document.getElementById("mainLabel").innerHTML = "Session";
     if (this.state.countdown === false) {
       this.setState({
         countdown: true,
@@ -130,12 +130,12 @@ class App extends React.Component {
 
   start_break = () => {
     if (this.state.cycle === "break") {
-      this.togglePlay()
-      this.setState({play: false})
-let label = document.getElementById("mainLabel").innerHTML="Break Time"
+      this.togglePlay();
+      this.setState({ play: false });
+      let label = (document.getElementById("mainLabel").innerHTML =
+        "Break Time");
       this.breakTimer = setInterval(() => {
         const { seconds, minutes, break_length } = this.state;
-
         if (seconds > 0) {
           this.setState(({ seconds }) => ({
             seconds: seconds - 1,
@@ -145,21 +145,13 @@ let label = document.getElementById("mainLabel").innerHTML="Break Time"
           if (break_length === 0) {
             clearInterval(this.break_Timer);
           } else {
-            console.log("in else block 333");
             let newMinuteValue = break_length - 1;
-            console.log("🚀 ~ file: App.js ~ line 129 ~ App ~ this.breakTimer=setInterval ~ newMinuteValue", newMinuteValue)
             this.setState(({ minutes }) => ({
               minutes: newMinuteValue,
               break_length: newMinuteValue,
-              seconds: 59, //it is setting seconds equal to 59 instead of decrementing
-              //the minutes
-              
+              seconds: 59,
             }));
-            this.audio.play()
-
-            console.log(this.state.break_length)
-            console.log(this.state.minutes)
-           
+            // this.audio.play()
           }
         }
       }, 100);
@@ -176,10 +168,6 @@ let label = document.getElementById("mainLabel").innerHTML="Break Time"
       countdown: false,
     });
   };
-
-  // playSound = () => {
-  //   this.audio.play();
-  // };
 
   render() {
     const { minutes, seconds } = this.state;
@@ -212,11 +200,6 @@ let label = document.getElementById("mainLabel").innerHTML="Break Time"
           <div id="session-label">Session Length</div>
         </div>
         <div id="time-left">
-          {/* {minutes === 0 && seconds === 0 ? (
-            <h4> 
-              Break time: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
-            </h4>
-          ) : ( */}
           <h4>
             Time Left: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
           </h4>
