@@ -113,29 +113,31 @@ class App extends React.Component {
 
   start_break = () => {
     console.log('triggered start_break') //yes
-
-    this.myInterval = setInterval(() => {
-      console.log("triggered myInterval 2")
-      const { cycle, seconds, minutes } = this.state;
-      if (cycle === "break") {
-        if (seconds > 0) {
-          this.setState(({ seconds }) => ({
-            seconds: seconds - 1,
-          }));
-        }
-        if (seconds === 0) {
-          if (minutes === 0) {
-            this.setState({cycle : 'session'})
-            clearInterval(this.myInterval);
-          } else {
-            this.setState({
-              minutes: this.state.break_length - 1,
-              seconds: 59,
-            });
+    if (this.state.cycle === 'break') {
+      console.log('entered if block')
+      this.myInterval = setInterval(() => {
+        console.log("triggered myInterval 2")
+        const { cycle, seconds, minutes } = this.state;
+        if (cycle === "break") {
+          if (seconds > 0) {
+            this.setState(({ seconds }) => ({
+              seconds: seconds - 1,
+            }));
+          }
+          if (seconds === 0) {
+            if (minutes === 0) {
+              this.setState({cycle : 'session'})
+              clearInterval(this.myInterval);
+            } else {
+              this.setState({
+                minutes: this.state.break_length - 1,
+                seconds: 59,
+              });
+            }
           }
         }
-      }
-    }, 1000);
+      }, 1000);
+    }
   };
 
   reset = () => {
