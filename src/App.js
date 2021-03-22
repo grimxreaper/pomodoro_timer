@@ -111,20 +111,16 @@ class App extends React.Component {
   };
 
   start_break = () => {
-    console.log(this.state.countdown)
 
     if (this.state.cycle === "break") {
       this.breakTimer = setInterval(() => {
         const { seconds, minutes, break_length } = this.state;
-
-        console.log("triggered breakTimer");
 
         if (seconds > 0) {
           this.setState(({ seconds }) => ({
             seconds: seconds - 1,
           }));
         }
-
 
         if (seconds === 0) {
           if (break_length === 0) {
