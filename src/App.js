@@ -117,6 +117,7 @@ class App extends React.Component {
       cycle: "session",
       countdown: false,
     });
+    clearInterval(this.myInterval)
   };
 
   // playSound = () => {
@@ -182,6 +183,7 @@ class App extends React.Component {
           src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
           id="beep"
           ref={this.audio}
+          preload="auto"
         />
       </div>
     );
