@@ -11,18 +11,35 @@ class App extends React.Component {
       break_length: 1,
       session_length: 1,
       minutes: 1,
+      play: false,
       seconds: 0,
       cycle: "session",
       countdown: false,
     };
     this.start_break = this.start_break.bind(this);
     this.start_stop = this.start_stop.bind(this);
-    this.audio = React.createRef();
+    // this.audio = React.createRef();
   }
+  audio = new Audio("https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav")
+
+  componentDidMount() {
+    this.audio.addEventListener('ended', () => this.setState({ play: false }));
+  }
+
+  componentWillUnmount() {
+    this.audio.removeEventListener('ended', () => this.setState({ play: false }));  
+  }
+
+  togglePlay = () => {
+    this.setState({ play: !this.state.play }, () => {
+      this.state.play ? this.audio.play() : this.audio.pause();
+    });
+  }
+
 
   onClick = (button) => {
     const id = button.target.id;
-    console.log(id);
+
     if (id === "start_stop") {
       this.start_stop();
     } else if (id === "break-decrement") {
@@ -72,6 +89,7 @@ class App extends React.Component {
   };
 
   start_stop = () => {
+    document.getElementById("mainLabel").innerHTML="Session"
     if (this.state.countdown === false) {
       this.setState({
         countdown: true,
@@ -99,7 +117,7 @@ class App extends React.Component {
             }));
           }
         }
-      }, 1000);
+      }, 100);
     } else if (this.state.countdown === true) {
       this.setState({
         countdown: false,
@@ -111,8 +129,10 @@ class App extends React.Component {
   };
 
   start_break = () => {
-
     if (this.state.cycle === "break") {
+      this.togglePlay()
+      this.setState({play: false})
+let label = document.getElementById("mainLabel").innerHTML="Hi there"
       this.breakTimer = setInterval(() => {
         const { seconds, minutes, break_length } = this.state;
 
@@ -121,21 +141,28 @@ class App extends React.Component {
             seconds: seconds - 1,
           }));
         }
-
         if (seconds === 0) {
           if (break_length === 0) {
-            clearInterval(this.break_Timer)
-          }
-          else {
-            console.log('in else block 333');
-            this.setState(({minutes}) => ({
-              minutes: break_length - 1,
+            clearInterval(this.break_Timer);
+          } else {
+            console.log("in else block 333");
+            let newMinuteValue = break_length - 1;
+            console.log("🚀 ~ file: App.js ~ line 129 ~ App ~ this.breakTimer=setInterval ~ newMinuteValue", newMinuteValue)
+            this.setState(({ minutes }) => ({
+              minutes: newMinuteValue,
+              break_length: newMinuteValue,
               seconds: 59, //it is setting seconds equal to 59 instead of decrementing
               //the minutes
+              
             }));
+            this.audio.play()
+
+            console.log(this.state.break_length)
+            console.log(this.state.minutes)
+           
           }
         }
-      }, 1000);
+      }, 100);
     }
   };
 
@@ -160,17 +187,15 @@ class App extends React.Component {
       <div>
         <h1>Pomodoro Timer</h1>
         <div id="timer-label">
-          <h2> Session In Progress </h2>
+          <h2 id="mainLabel"> Session In Progress </h2>
         </div>
 
-        {/* decrement */}
         <button id="break-decrement" onClick={this.onClick}>
           Decrease Break Length
         </button>
         <button id="session-decrement" onClick={this.onClick}>
           Decrease Session Length
         </button>
-        {/* increment */}
         <button id="break-increment" onClick={this.onClick}>
           Increase Break Length
         </button>
@@ -189,7 +214,6 @@ class App extends React.Component {
         <div id="time-left">
           {/* {minutes === 0 && seconds === 0 ? (
             <h4> 
-              {this.start_break()}
               Break time: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
             </h4>
           ) : ( */}
