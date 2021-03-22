@@ -114,32 +114,51 @@ class App extends React.Component {
   start_break = () => {
     console.log('triggered start_break') //yes
 
-    if (this.state.cycle === 'break') {
+
+
+    if (this.state.countdown === false) {
+      this.setState({
+        countdown: true,
+      });
+
       this.breakTimer = setInterval(() => {
-        console.log("triggered breakTimer") //yes
-        const { seconds, minutes } = this.state;
+        const { seconds, minutes} = this.state;
 
-
-            // this.setState({
-            //   // minutes: this.state.break_length - 1,
-            //   seconds: 59 - 1
-            // })
-
-            if (seconds === 0) {
-              if (minutes === 0) {
-                clearInterval(this.break_increment)
-              } else {
-                console.log("entered else block")
-            this.setState(({minutes, seconds}) => ({
-              minutes: this.state.break_length - 1,
-              seconds: 59
-            }))
-          }
+        if (seconds > 0) {
+          this.setState(({ seconds }) => ({
+            seconds: seconds - 1,
+          }));
         }
-          
+        if (seconds === 0) {
+          if (minutes === 0) {
+              clearInterval(this.breakTimer);
+            }
+          } else {
+            this.setState(({ minutes }) => ({
+              minutes: this.state.break_length - 1,
+              seconds: 59,
+            }));
+          }
         
-
       }, 1000);
+
+
+
+
+
+  //   if (this.state.cycle === 'break') {
+  //     this.breakTimer = setInterval(() => {
+  //       console.log("triggered breakTimer") //yes
+  //       // const { seconds, minutes } = this.state;
+
+
+  //           // this.setState({
+  //           //   // minutes: this.state.break_length - 1,
+  //           //   seconds: 59 - 1
+  //           // })
+
+  //   })
+  // }
     }
   };
 
