@@ -117,7 +117,8 @@ class App extends React.Component {
       cycle: "session",
       countdown: false,
     });
-    clearInterval(this.myInterval)
+    //the reset needs to stop the countdown even when
+    //clicked when countdown is already running
   };
 
   // playSound = () => {
