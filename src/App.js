@@ -124,24 +124,19 @@ class App extends React.Component {
             seconds: seconds - 1,
           }));
         }
-        if (seconds === 0 && minutes > 0) {
-          this.setState(({minutes}) => ({
-            minutes: minutes - 1
-          }));
-        }
+
 
         if (seconds === 0) {
           if (break_length === 0) {
-            console.log(break_length);
             clearInterval(this.break_Timer)
           }
           else {
             console.log('in else block 333');
-            this.setState({
+            this.setState(({minutes}) => ({
               minutes: break_length - 1,
               seconds: 59, //it is setting seconds equal to 59 instead of decrementing
               //the minutes
-            });
+            }));
           }
         }
       }, 1000);
