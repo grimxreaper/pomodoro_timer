@@ -86,6 +86,8 @@ class App extends React.Component {
         if (seconds === 0) {
           if (minutes === 0) {
             clearInterval(this.myInterval);
+            //here perhaps start the countdown anew using
+            //the value stored in state for break length as the minutes
 
           } else {
             this.setState(({ minutes }) => ({
