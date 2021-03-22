@@ -77,7 +77,7 @@ class App extends React.Component {
       });
 
       this.myInterval = setInterval(() => {
-        const { seconds, minutes} = this.state;
+        const { seconds, minutes } = this.state;
 
         if (seconds > 0) {
           this.setState(({ seconds }) => ({
@@ -88,10 +88,8 @@ class App extends React.Component {
           if (minutes === 0) {
             if (this.state.cycle === "session") {
               this.setState({ cycle: "break" });
-              console.log('here 1') //yes
-              this.start_break() //yes
+              this.start_break();
               clearInterval(this.myInterval);
-
             }
           } else {
             this.setState(({ minutes }) => ({
@@ -112,47 +110,31 @@ class App extends React.Component {
   };
 
   start_break = () => {
-    console.log('triggered start_break') //yes
+    if (this.state.cycle === "break") {
 
       this.breakTimer = setInterval(() => {
-        const { seconds, minutes} = this.state;
-console.log('inside interval')
+
+        const { seconds, minutes, break_length } = this.state;
+
+        console.log("triggered breakTimer");
+
         if (seconds > 0) {
           this.setState(({ seconds }) => ({
             seconds: seconds - 1,
           }));
         }
+        
         if (seconds === 0) {
           if (minutes === 0) {
-              clearInterval(this.breakTimer);
-            }
-          } else {
-            this.setState(({ minutes }) => ({
-              minutes: this.state.break_length - 1,
+            console.log(break_length)
+            this.setState({
+              minutes: break_length - 1, //this line isn't rendering
               seconds: 59,
-            }));
+            });
           }
-        
+        }
       }, 1000);
-
-    
-
-
-
-  //   if (this.state.cycle === 'break') {
-  //     this.breakTimer = setInterval(() => {
-  //       console.log("triggered breakTimer") //yes
-  //       // const { seconds, minutes } = this.state;
-
-
-  //           // this.setState({
-  //           //   // minutes: this.state.break_length - 1,
-  //           //   seconds: 59 - 1
-  //           // })
-
-  //   })
-  // }
-    
+    }
   };
 
   reset = () => {
@@ -171,10 +153,7 @@ console.log('inside interval')
   // };
 
   render() {
-    const {
-      minutes,
-      seconds,
-    } = this.state;
+    const { minutes, seconds } = this.state;
     return (
       <div>
         <h1>Pomodoro Timer</h1>
@@ -212,13 +191,16 @@ console.log('inside interval')
               Break time: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
             </h4>
           ) : ( */}
-            <h4>
-              Time Left: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
-            </h4>
-          
+          <h4>
+            Time Left: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
+          </h4>
         </div>
 
-        <button id="start_stop" onClick={this.onClick} onClick={this.start_stop.bind(this)}>
+        <button
+          id="start_stop"
+          onClick={this.onClick}
+          onClick={this.start_stop.bind(this)}
+        >
           {" "}
           Start/Stop
         </button>
