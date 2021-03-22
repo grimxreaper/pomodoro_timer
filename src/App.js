@@ -7,9 +7,9 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      break_length: 5,
-      session_length: 25,
-      minutes: 25,
+      break_length: 1,
+      session_length: 1,
+      minutes: 1,
       seconds: 0,
       cycle: "session",
       countdown: false,
@@ -56,7 +56,7 @@ class App extends React.Component {
     if (this.state.session_length > 0)
       this.setState({
         session_length: this.state.session_length - 1,
-        minutes: this.state.session_length - 1
+        minutes: this.state.session_length - 1,
       });
   };
 
@@ -64,12 +64,10 @@ class App extends React.Component {
     if (this.state.session_length < 60) {
       this.setState({
         session_length: this.state.session_length + 1,
-        minutes: this.state.session_length + 1
+        minutes: this.state.session_length + 1,
       });
     }
   };
-
-
 
   start_stop = () => {
     if (this.state.countdown === false) {
@@ -78,7 +76,7 @@ class App extends React.Component {
       });
 
       this.myInterval = setInterval(() => {
-        const { seconds, minutes } = this.state;
+        const { seconds, minutes, cycle } = this.state;
 
         if (seconds > 0) {
           this.setState(({ seconds }) => ({
@@ -87,13 +85,14 @@ class App extends React.Component {
         }
         if (seconds === 0) {
           if (minutes === 0) {
-            // clearInterval(this.myInterval);
+            if (this.state.cycle === "session") {
+            this.setState({cycle: "break"})
+            clearInterval(this.myInterval);
             //here perhaps start the countdown anew using
             //the value stored in state for break length as the minutes
-            this.setState(({ minutes }) => ({
-              minutes: this.state.break_length - 1,
-              seconds: 0
-            }))
+            console.log(this.state.cycle);
+            console.log('entered')
+            }
 
           } else {
             this.setState(({ minutes }) => ({
@@ -104,17 +103,25 @@ class App extends React.Component {
         }
       }, 1000);
     } else if (this.state.countdown === true) {
-        this.setState({
-          countdown: false,
-        });
+      this.setState({
+        countdown: false,
+      });
       {
         clearInterval(this.myInterval);
       }
     }
   };
 
-
-  
+  start_break = () => {
+    this.myInterval = setInterval(() => {
+      const { cycle } = this.state;
+      if (cycle === "break") {
+        this.setState({
+          minutes: this.state.break_length - 1,
+        });
+      }
+    });
+  };
 
   reset = () => {
     this.setState({
@@ -163,11 +170,13 @@ class App extends React.Component {
           Increase Session Length
         </button>
 
-        <div id="break-length">{this.state.break_length} 
-        <div id="break-label">Break Length</div>
+        <div id="break-length">
+          {this.state.break_length}
+          <div id="break-label">Break Length</div>
         </div>
-        <div id="session-length">{this.state.session_length} 
-        <div id="session-label">Session Length</div>
+        <div id="session-length">
+          {this.state.session_length}
+          <div id="session-label">Session Length</div>
         </div>
         <div id="time-left">
           {minutes === 0 && seconds === 0 ? (
