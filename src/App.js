@@ -76,7 +76,7 @@ class App extends React.Component {
       });
 
       this.myInterval = setInterval(() => {
-        const { seconds, minutes, cycle } = this.state;
+        const { seconds, minutes} = this.state;
 
         if (seconds > 0) {
           this.setState(({ seconds }) => ({
@@ -87,11 +87,9 @@ class App extends React.Component {
           if (minutes === 0) {
             if (this.state.cycle === "session") {
               this.setState({ cycle: "break" });
+              this.start_break()
               clearInterval(this.myInterval);
-              //here perhaps start the countdown anew using
-              //the value stored in state for break length as the minutes
-              console.log(this.state.cycle);
-              console.log("entered");
+
             }
           } else {
             this.setState(({ minutes }) => ({
@@ -113,7 +111,7 @@ class App extends React.Component {
 
   start_break = () => {
     this.myInterval = setInterval(() => {
-      const { cycle } = this.state;
+      const { cycle, seconds, minutes } = this.state;
       if (cycle === "break") {
         if (seconds > 0) {
           this.setState(({ seconds }) => ({
@@ -122,6 +120,7 @@ class App extends React.Component {
         }
         if (seconds === 0) {
           if (minutes === 0) {
+            this.setState({cycle : 'session'})
             clearInterval(this.myInterval);
           } else {
             this.setState({
@@ -153,9 +152,6 @@ class App extends React.Component {
 
   render() {
     const {
-      break_length,
-      session_length,
-      time_left,
       minutes,
       seconds,
     } = this.state;
