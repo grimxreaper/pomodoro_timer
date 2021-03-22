@@ -1,6 +1,7 @@
 import React from "react";
 import "./App.css";
 import ReactDOM from "react-dom";
+import { getByDisplayValue } from "@testing-library/react";
 
 class App extends React.Component {
   constructor(props) {
@@ -111,9 +112,9 @@ class App extends React.Component {
 
   start_break = () => {
     if (this.state.cycle === "break") {
-
+      // const display = parent.parentNode; 
+      // display.querySelector('h2').innerText = `break time`;
       this.breakTimer = setInterval(() => {
-
         const { seconds, minutes, break_length } = this.state;
 
         console.log("triggered breakTimer");
@@ -123,15 +124,21 @@ class App extends React.Component {
             seconds: seconds - 1,
           }));
         }
-        
+
         if (seconds === 0) {
           if (minutes === 0) {
-            console.log(break_length)
+            console.log(break_length);
             this.setState({
-              minutes: break_length - 1, //this line isn't rendering
+              minutes: break_length - 1, //I think this line isn't rendering
               seconds: 59,
             });
           }
+          // } else {
+          //   this.setState({
+          //     minutes: break_length - 1,
+          //     seconds: 59,
+          //   });
+          // }
         }
       }, 1000);
     }
@@ -158,7 +165,7 @@ class App extends React.Component {
       <div>
         <h1>Pomodoro Timer</h1>
         <div id="timer-label">
-          <p> Session In Progress </p>
+          <h2> Session In Progress </h2>
         </div>
 
         {/* decrement */}
