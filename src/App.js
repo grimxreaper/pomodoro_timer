@@ -88,8 +88,8 @@ class App extends React.Component {
           if (minutes === 0) {
             if (this.state.cycle === "session") {
               this.setState({ cycle: "break" });
-              console.log('here 1')
-              this.start_break()
+              console.log('here 1') //yes
+              this.start_break() //yes
               clearInterval(this.myInterval);
 
             }
@@ -106,15 +106,16 @@ class App extends React.Component {
         countdown: false,
       });
       {
-        console.log('here 2')
-        this.start_break()
         clearInterval(this.myInterval);
       }
     }
   };
 
   start_break = () => {
+    console.log('triggered start_break') //yes
+
     this.myInterval = setInterval(() => {
+      console.log("triggered myInterval 2")
       const { cycle, seconds, minutes } = this.state;
       if (cycle === "break") {
         if (seconds > 0) {
@@ -146,8 +147,6 @@ class App extends React.Component {
       cycle: "session",
       countdown: false,
     });
-    //the reset needs to stop the countdown even when
-    //clicked when countdown is already running
   };
 
   // playSound = () => {
@@ -190,15 +189,16 @@ class App extends React.Component {
           <div id="session-label">Session Length</div>
         </div>
         <div id="time-left">
-          {minutes === 0 && seconds === 0 ? (
+          {/* {minutes === 0 && seconds === 0 ? (
             <h4> 
+              {this.start_break()}
               Break time: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
             </h4>
-          ) : (
+          ) : ( */}
             <h4>
               Time Left: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
             </h4>
-          )}
+          
         </div>
 
         <button id="start_stop" onClick={this.onClick} onClick={this.start_stop.bind(this)}>
