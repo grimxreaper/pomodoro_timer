@@ -132,7 +132,7 @@ class App extends React.Component {
     if (this.state.cycle === "break") {
       this.togglePlay()
       this.setState({play: false})
-let label = document.getElementById("mainLabel").innerHTML="Hi there"
+let label = document.getElementById("mainLabel").innerHTML="Break Time"
       this.breakTimer = setInterval(() => {
         const { seconds, minutes, break_length } = this.state;
 
