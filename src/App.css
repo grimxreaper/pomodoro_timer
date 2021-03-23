@@ -20,13 +20,11 @@ button {
   background: rgb(255,152,194);
   background: linear-gradient(90deg, rgba(255,152,194,1) 0%, rgba(255,126,167,1) 50%, rgba(255,89,130,1) 100%);
   font-family: 'Open Sans', sans-serif;
-  
   padding: 0.25em 0.75em;
   min-width: 7ch;
   min-height: 44px;
-
   margin: 10px;
-  display: inline-flex;
+  /* display: inline-flex; */
   align-items: center;
   justify-content: center;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
@@ -36,6 +34,29 @@ button {
   position: relative;
 }
 
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  align-content: space-around;
+}
+
+#break-decrement
+#break-increment {
+  display: flex;
+  flex-direction: column;
+  justify-self: flex-end;
+  justify-self: flex-start;
+}
+#break-label {
+  display: flex;
+  flex-direction: row;
+}
+#session-label{
+  display: flex;
+  align-self: flex-start;
+
+}
 #iconBdown {
   position: absolute;
   top: 35%;
@@ -95,19 +116,27 @@ h2 {
 
 #break-length{
   font-family: 'Open Sans', sans-serif;
+  text-transform: lowercase;
+  color: #585858;
 }
 #session-length{
   font-family: 'Open Sans', sans-serif;
+  text-transform: lowercase;
+  color: #585858;
 }
 #time-left{
   font-family: 'Open Sans', sans-serif;
   color: rgb(43, 41, 42);
 
 }
+#mainLabel{
+  text-transform: lowercase;
+}
 
 .timer {
   font-size: 38px;
   border: 6px solid rgb(250, 179, 158);
+  border-radius: 7px;
   width: 160px;
   height: 70px;
   margin: 20px auto 10px auto;
