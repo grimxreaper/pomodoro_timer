@@ -47,7 +47,7 @@ button {
   position: relative;
 }
 
-#icondown {
+#iconBdown {
   position: absolute;
   top: 35%;
   left: 50%;
@@ -60,7 +60,35 @@ button {
   align-content: center;
 }
 
-#iconup{
+#iconSdown {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 30px;
+  display: block;
+  line-height: 50%;
+  align-content: center;
+}
+#iconBup{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: span 2;
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 30px;
+  display: block;
+  line-height: 50%;
+  align-content: center;
+}
+#iconSup{
   position: absolute;
   top: 65%;
   left: 50%;

@@ -182,19 +182,19 @@ class App extends React.Component {
           </div>
           <div className="container">
           <button id="break-decrement" onClick={this.onClick}>
-            <FontAwesomeIcon icon={faSortDown} id="icondown" />
+            <FontAwesomeIcon icon={faSortDown} id="iconBdown" />
           </button>
           <button id="break-increment" onClick={this.onClick}>
-            <FontAwesomeIcon icon={faSortUp} id="iconup" />
+            <FontAwesomeIcon icon={faSortUp} id="iconBup" />
           </button>
           <div id="break-length">
             <div id="break-label"> Break Length: {this.state.break_length}</div>
           </div>
           <button id="session-decrement" onClick={this.onClick}>
-            <FontAwesomeIcon icon={faSortDown} id="icondown" />
+            <FontAwesomeIcon icon={faSortDown} id="iconSdown" />
           </button>
           <button id="session-increment" onClick={this.onClick}>
-            <FontAwesomeIcon icon={faSortUp} id="iconup" />
+            <FontAwesomeIcon icon={faSortUp} id="iconSup" />
           </button>
           <div id="session-length">
             <div id="session-label">
