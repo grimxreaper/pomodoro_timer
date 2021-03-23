@@ -1,6 +1,11 @@
+* {
+  box-sizing: border-box;
+}
 body {
   background-color: #FFFAFB;
   text-align: center;
+  /* display: flex;
+  align-items: center; */
 }
 #page-title {
   font-family: 'Work Sans', sans-serif;
@@ -16,6 +21,8 @@ button {
   background: rgb(255,152,194);
   background: linear-gradient(90deg, rgba(255,152,194,1) 0%, rgba(255,126,167,1) 50%, rgba(255,89,130,1) 100%);
   font-family: 'Open Sans', sans-serif;
+  padding: 10px 15px;
+  margin: 10px;
 }
 
 h2 {
