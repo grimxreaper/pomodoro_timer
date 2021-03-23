@@ -2,6 +2,9 @@ import React from "react";
 import "./App.css";
 import ReactDOM from "react-dom";
 import { getByDisplayValue } from "@testing-library/react";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { fab } from '@fortawesome/free-brands-svg-icons'
+import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
 
 class App extends React.Component {
   constructor(props) {
@@ -185,11 +188,19 @@ class App extends React.Component {
           Decrease Session Length
         </button>
         <button id="break-increment" onClick={this.onClick}>
-          Increase Break Length
+          <span>more break</span>
+         
+          <FontAwesomeIcon icon="fas fa-angle-up"/>
         </button>
         <button id="session-increment" onClick={this.onClick}>
           Increase Session Length
+          <FontAwesomeIcon icon="coffee" />
         </button>
+
+        <div>
+
+<FontAwesomeIcon icon={faCoffee} />
+  </div>
 
         <div id="break-length">
           {this.state.break_length}
