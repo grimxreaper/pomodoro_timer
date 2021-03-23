@@ -215,7 +215,7 @@ class App extends React.Component {
           {" "}
           Start/Stop
         </button>
-        <button id="reset" onClick={this.onClick}>
+        <button class="reset" id="reset" onClick={this.onClick}>
           {" "}
           Reset{" "}
         </button>
