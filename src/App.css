@@ -4,6 +4,7 @@
 body {
   background-color: #FFFAFB;
   text-align: center;
+  display: grid;
   grid-template-columns: 50px 50px auto 50px 50px;
   grid-template-rows: 25% 25% 100px auto auto;
   grid-template-areas:
@@ -17,7 +18,12 @@ body {
   font-family: 'Work Sans', sans-serif;
   color: #FF87C5;
   font-size: 47px;
-  /* grid-area: footer; not working */
+  display: grid;
+  grid-column-start: 3;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 1;
+  justify-self: stretch;
 }
 
 
@@ -46,6 +52,7 @@ button {
 }
 
 #break-increment{
+  display: grid;
   grid-column-start: 1;
   grid-column-end: 3;
   grid-row-start: 2;
