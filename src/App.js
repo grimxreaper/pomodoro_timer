@@ -193,10 +193,13 @@ class App extends React.Component {
               class="start"
               onClick={this.onClick}
               onClick={this.start_stop.bind(this)}
-            > Start/Stop
+            >
+              {" "}
+              Start/Stop
             </button>
             <button class="reset" id="reset" onClick={this.onClick}>
-              Reset </button>
+              Reset{" "}
+            </button>
             <audio
               src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
               id="beep"
@@ -204,7 +207,7 @@ class App extends React.Component {
               preload="auto"
             />
           </div>
-          
+
           <div className="container">
             <button id="break-decrement" onClick={this.onClick}>
               <FontAwesomeIcon
@@ -220,12 +223,7 @@ class App extends React.Component {
                 onClick={this.break_increment}
               />
             </button>
-            <div id="break-length" className="break-label">
-              <div id="break-label">
-                {" "}
-                Break Length: {this.state.break_length} mins
-              </div>
-            </div>
+
             <button id="session-decrement" onClick={this.onClick}>
               <FontAwesomeIcon
                 icon={faSortDown}
@@ -240,14 +238,21 @@ class App extends React.Component {
                 onClick={this.session_increment}
               />
             </button>
+            </div>
+            <div className="labelContainer">
+            <div id="break-length" className="break-label">
+              <div id="break-label">
+                {" "}
+                Break Length: {this.state.break_length} mins
+              </div>
+            </div>
             <div id="session-length" className="session-label">
               <div id="session-label">
                 Session Length: {this.state.session_length} mins
               </div>
             </div>
+
           </div>
-          
-          
         </div>
       </div>
     );

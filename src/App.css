@@ -44,7 +44,7 @@ button {
   padding: 0;
   margin: 0;
 }
-.container {
+/* .container {
   display: flex;
   flex-flow: row wrap;
   align-items: center;
@@ -53,17 +53,19 @@ button {
   justify-self: center;
   padding: 0;
   margin: 0;
+} */
+
+.labelContainer{
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: center;
+
 }
 .break-label {
-display: flex;
-align-self: flex-end;
-
+padding: 10px;
 }
-
 .session-label{
-  display: flex;
-  align-self: flex-end;
-  
+padding: 10px;
 
 }
 #break-decrement
