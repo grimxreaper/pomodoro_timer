@@ -3,8 +3,11 @@ import "./App.css";
 import ReactDOM from "react-dom";
 import { getByDisplayValue } from "@testing-library/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { fab } from '@fortawesome/free-brands-svg-icons'
 import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
+import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
+import { faSortUp } from '@fortawesome/free-solid-svg-icons';
+
+
 
 class App extends React.Component {
   constructor(props) {
@@ -188,18 +191,21 @@ class App extends React.Component {
           Decrease Session Length
         </button>
         <button id="break-increment" onClick={this.onClick}>
-          <span>more break</span>
+         more break
          
-          <FontAwesomeIcon icon="fas fa-angle-up"/>
+          
         </button>
         <button id="session-increment" onClick={this.onClick}>
           Increase Session Length
-          <FontAwesomeIcon icon="coffee" />
+          
         </button>
 
-        <div>
+       <button><FontAwesomeIcon icon={faCoffee} /></button>
 
+        <div>
+        <FontAwesomeIcon icon={faThumbsUp}/>
 <FontAwesomeIcon icon={faCoffee} />
+<FontAwesomeIcon icon={faSortUp} />
   </div>
 
         <div id="break-length">
@@ -243,3 +249,4 @@ class App extends React.Component {
 }
 
 ReactDOM.render(<App />, document.getElementById("app"));
+export default App;
