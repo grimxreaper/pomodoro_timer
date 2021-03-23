@@ -2,13 +2,12 @@
   box-sizing: border-box;
 }
 body {
-  background-color: #FFFAFB;
+  background-color: #fffafb;
   text-align: center;
-
 }
 #page-title {
-  font-family: 'Work Sans', sans-serif;
-  color: #FF87C5;
+  font-family: "Work Sans", sans-serif;
+  color: #ff87c5;
   font-size: 47px;
 }
 
@@ -17,9 +16,14 @@ button {
   border: none;
   cursor: pointer;
   border-radius: 7px;
-  background: rgb(255,152,194);
-  background: linear-gradient(90deg, rgba(255,152,194,1) 0%, rgba(255,126,167,1) 50%, rgba(255,89,130,1) 100%);
-  font-family: 'Open Sans', sans-serif;
+  background: rgb(255, 152, 194);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 152, 194, 1) 0%,
+    rgba(255, 126, 167, 1) 50%,
+    rgba(255, 89, 130, 1) 100%
+  );
+  font-family: "Open Sans", sans-serif;
   padding: 0.25em 0.75em;
   min-width: 7ch;
   min-height: 44px;
@@ -55,21 +59,19 @@ button {
   margin: 0;
 } */
 
-.labelContainer{
+.labelContainer {
   display: flex;
   flex-flow: row nowrap;
   justify-content: center;
-
 }
 .break-label {
-padding: 10px;
+  padding: 10px;
 }
-.session-label{
-padding: 10px;
+.session-label {
+  padding: 10px;
+}
 
-}
-#break-decrement
-#break-increment {
+#break-decrement #break-increment {
   display: flex;
   flex-direction: column;
   justify-self: flex-end;
@@ -79,10 +81,9 @@ padding: 10px;
   display: flex;
   flex-direction: row;
 }
-#session-label{
+#session-label {
   display: flex;
   align-self: flex-start;
-
 }
 #iconBdown {
   position: absolute;
@@ -109,7 +110,7 @@ padding: 10px;
   line-height: 50%;
   align-content: center;
 }
-#iconBup{
+#iconBup {
   position: absolute;
   top: 65%;
   left: 50%;
@@ -121,7 +122,7 @@ padding: 10px;
   line-height: 50%;
   align-content: center;
 }
-#iconSup{
+#iconSup {
   position: absolute;
   top: 65%;
   left: 50%;
@@ -138,25 +139,24 @@ h2 {
   font-size: 22px;
   text-transform: lowercase;
   color: #585858;
-  font-family: 'Open Sans', sans-serif;
+  font-family: "Open Sans", sans-serif;
 }
 
-#break-length{
-  font-family: 'Open Sans', sans-serif;
+#break-length {
+  font-family: "Open Sans", sans-serif;
   text-transform: lowercase;
   color: #585858;
 }
-#session-length{
-  font-family: 'Open Sans', sans-serif;
+#session-length {
+  font-family: "Open Sans", sans-serif;
   text-transform: lowercase;
   color: #585858;
 }
-#time-left{
-  font-family: 'Open Sans', sans-serif;
+#time-left {
+  font-family: "Open Sans", sans-serif;
   color: rgb(43, 41, 42);
-
 }
-#mainLabel{
+#mainLabel {
   text-transform: lowercase;
 }
 
@@ -173,13 +173,9 @@ h2 {
 
 .start {
   padding: 8px;
-  /* margin: 10px 10px 10px auto; */
   font-size: 15px;
-
 }
 .reset {
   padding: 8px;
-  /* margin: 10px 10px 10px auto; */
   font-size: 15px;
-
 }
