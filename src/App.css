@@ -38,6 +38,15 @@ button {
   position: relative;
 }
 
+button:active {
+  transform: scale(0.9);
+}
+
+button:hover {
+  opacity: 0.75;
+
+}
+
 .topContainer {
   display: flex;
   flex-flow: row wrap-reverse;
