@@ -207,9 +207,11 @@ class App extends React.Component {
 
         <button
           id="start_stop"
+          class="start"
           onClick={this.onClick}
           onClick={this.start_stop.bind(this)}
         >
+          
           {" "}
           Start/Stop
         </button>
