@@ -1,3 +1,48 @@
+body {
+  background-color: #FFFAFB;
+  text-align: center;
+}
+#page-title {
+  font-family: 'Work Sans', sans-serif;
+  color: #FF87C5;
+  font-size: 47px;
+}
+
+button {
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  background: rgb(255,152,194);
+  background: linear-gradient(90deg, rgba(255,152,194,1) 0%, rgba(255,126,167,1) 50%, rgba(255,89,130,1) 100%);
+}
+
+h2 {
+  font-size: 22px;
+  text-transform: lowercase;
+  color: #585858;
+  font-family: 'Open Sans', sans-serif;
+}
+
+#break-length{
+  font-family: 'Open Sans', sans-serif;
+}
+#session-length{
+  font-family: 'Open Sans', sans-serif;
+}
+#time-left{
+  font-family: 'Open Sans', sans-serif;
+}
+
+
+
+
+
+
+
+
+
+
 /* body {
   background: #1e555c;
   color: white;

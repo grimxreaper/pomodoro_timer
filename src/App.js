@@ -173,7 +173,7 @@ class App extends React.Component {
     const { minutes, seconds } = this.state;
     return (
       <div>
-        <h1>Pomodoro Timer</h1>
+        <h1 id="page-title">Pomodoro Timer</h1>
         <div id="timer-label">
           <h2 id="mainLabel"> Session In Progress </h2>
         </div>
