@@ -3,9 +3,7 @@ import "./App.css";
 import ReactDOM from "react-dom";
 import { getByDisplayValue } from "@testing-library/react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faCheckSquare, faCoffee } from '@fortawesome/free-solid-svg-icons'
-import { faThumbsUp } from '@fortawesome/free-solid-svg-icons';
-import { faSortUp } from '@fortawesome/free-solid-svg-icons';
+import { faSortUp, faSortDown } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -185,28 +183,25 @@ class App extends React.Component {
         </div>
 
         <button id="break-decrement" onClick={this.onClick}>
-          Decrease Break Length
+          <span>break </span>
+        <FontAwesomeIcon icon={faSortDown} />
         </button>
-        <button id="session-decrement" onClick={this.onClick}>
-          Decrease Session Length
-        </button>
+
         <button id="break-increment" onClick={this.onClick}>
-         more break
-         
-          
+         break
+         <FontAwesomeIcon icon={faSortUp} />
         </button>
+
+        <button id="session-decrement" onClick={this.onClick}>
+          sesh
+          <FontAwesomeIcon icon={faSortDown} />
+        </button>
+
         <button id="session-increment" onClick={this.onClick}>
-          Increase Session Length
-          
+          sesh
+          <FontAwesomeIcon icon={faSortUp} />
         </button>
 
-       <button><FontAwesomeIcon icon={faCoffee} /></button>
-
-        <div>
-        <FontAwesomeIcon icon={faThumbsUp}/>
-<FontAwesomeIcon icon={faCoffee} />
-<FontAwesomeIcon icon={faSortUp} />
-  </div>
 
         <div id="break-length">
           {this.state.break_length}
