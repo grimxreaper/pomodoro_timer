@@ -21,17 +21,47 @@ button {
   background: rgb(255,152,194);
   background: linear-gradient(90deg, rgba(255,152,194,1) 0%, rgba(255,126,167,1) 50%, rgba(255,89,130,1) 100%);
   font-family: 'Open Sans', sans-serif;
+  
   padding: 0.25em 0.75em;
   min-width: 10ch;
   min-height: 44px;
+
   margin: 10px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
   font-size: 17px;
+  text-align: center;
+  line-height: 1.1;
+  position: relative;
 }
 
+#icondown {
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 30px;
+  display: block;
+  line-height: 50%;
+  align-content: center;
+}
+
+#iconup{
+  position: absolute;
+  top: 65%;
+  left: 50%;
+  height: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px;
+  height: 30px;
+  display: block;
+  line-height: 50%;
+  align-content: center;
+}
 
 h2 {
   font-size: 22px;
@@ -49,15 +79,16 @@ h2 {
 #time-left{
   font-family: 'Open Sans', sans-serif;
   color: rgb(43, 41, 42);
- 
+
 }
 
 .timer {
-  font-size: 30px;
+  font-size: 38px;
   border: 6px solid rgb(250, 179, 158);
-  width: 240px;
-  height: 50px;
+  width: 160px;
+  height: 70px;
   margin: 20px auto 10px auto;
+  text-align: center;
 }
 
 .start {
@@ -68,108 +99,3 @@ h2 {
   padding: 8px;
   margin: 10px 10px 10px auto;
 }
-#break-decrement {
-  height: 10vmin;
-  width: 17vmin;
-  align-items: center;
-}
-
-#icondown {
-  width: 3em;
-  height: 3em;
-  color: black;
-  align-content: center;
-  
-}
-
-
-/* body {
-  background: #1e555c;
-  color: white;
-  font-size: 30px;
-  text-align: center;
-}
-  #container {
-    display: flex;
-    height: 100vh;
-    justify-content: center;
-    align-items: center;
-  }
-
-    .main-title {
-      font-size: 50px;
-      margin-bottom: 20px;
-    }
-
-    .length-control {
-      width: 250px;
-    }
-    button {
-      background: none;
-      outline: none;
-      border: none;
-      color: white;
-      cursor: pointer;
-    }
-    .btn-level,
-    .length-control {
-      display: inline-block;
-    }
-      .btn-level:nth-child(3) {
-        width: 40px;
-      }
-
-    
-    .timer {
-      border: 7px solid #13353a;
-      margin: 20px auto 10px auto;
-      width: 270px;
-      height: 160px;
-      border-radius: 50px;
-      position: relative;
-    }
-      .timer-wrapper {
-        position: absolute;
-        width: 190px;
-        height: 110px;
-        left: 50%;
-        top: 50%;
-        margin-left: -95px;
-        margin-top: -57px;
-      }
-
-      #time-left {
-        font-family: digital;
-        font-size: 80px;
-      }
-      .timer-control button:active {
-        color: #13353a;
-      }
-    
-  
-
-
-@media screen and (max-width: 500px) {
-  #container {
-    transform: scale(0.8);
-    -webkit-transform: scale(0.8);
-    -moz-transform: scale(0.8);
-    -ms-transform: scale(0.8);
-    -o-transform: scale(0.8);
-  }
-}
-
-.author {
-  text-align: center;
-  font-family: Share Tech Mono, sans;
-  margin-top: 15px;
-  font-size: 14px;
-  color: #a50d0d;
-}
-
-  a {
-    text-decoration: none;
-    color: #00264d;
-    line-height: 26px;
-  }
- */
