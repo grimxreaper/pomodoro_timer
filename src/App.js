@@ -126,7 +126,7 @@ class App extends React.Component {
         clearInterval(this.myInterval);
       }
     }
-  };
+  }
 
   start_break = () => {
     if (this.state.cycle === "break") {
