@@ -17,7 +17,7 @@ body {
   font-family: 'Work Sans', sans-serif;
   color: #FF87C5;
   font-size: 47px;
-  grid-area: footer;
+  /* grid-area: footer; not working */
 }
 
 
