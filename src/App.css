@@ -36,10 +36,14 @@ button {
 
 .container {
   display: flex;
-  flex-flow: row wrap;
+  flex-flow: row wrap-reverse;
   align-items: center;
-  justify-content: center;
+  align-content: center;
+  justify-content: space-around;
   justify-self: center;
+  padding: 0;
+  margin: 0;
+
 
   /* align-content: space-around; */
 
@@ -164,4 +168,6 @@ h2 {
   padding: 8px;
   margin: 10px 10px 10px auto;
   font-size: 15px;
+  display: flex;
+  align-self: flex-start;
 }
