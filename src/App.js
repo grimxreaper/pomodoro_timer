@@ -200,8 +200,8 @@ class App extends React.Component {
           <div id="session-label">Session Length</div>
         </div>
         <div id="time-left">
-          <h4>
-            Time Left: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
+          <h4 class="timer">
+            Time left: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
           </h4>
         </div>
 
