@@ -21,9 +21,17 @@ button {
   background: rgb(255,152,194);
   background: linear-gradient(90deg, rgba(255,152,194,1) 0%, rgba(255,126,167,1) 50%, rgba(255,89,130,1) 100%);
   font-family: 'Open Sans', sans-serif;
-  padding: 10px 15px;
+  padding: 0.25em 0.75em;
+  min-width: 10ch;
+  min-height: 44px;
   margin: 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 3px 5px rgba(0, 0, 0, 0.18);
+  font-size: 17px;
 }
+
 
 h2 {
   font-size: 22px;
@@ -60,9 +68,19 @@ h2 {
   padding: 8px;
   margin: 10px 10px 10px auto;
 }
+#break-decrement {
+  height: 10vmin;
+  width: 17vmin;
+  align-items: center;
+}
 
-
-
+#icondown {
+  width: 3em;
+  height: 3em;
+  color: black;
+  align-content: center;
+  
+}
 
 
 /* body {

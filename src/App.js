@@ -183,8 +183,8 @@ class App extends React.Component {
         </div>
 
         <button id="break-decrement" onClick={this.onClick}>
-          <span>break </span>
-        <FontAwesomeIcon icon={faSortDown} />
+         less break
+        <FontAwesomeIcon icon={faSortDown} id="icondown"/>
         </button>
 
         <button id="break-increment" onClick={this.onClick}>
