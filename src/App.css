@@ -4,16 +4,6 @@
 body {
   background-color: #FFFAFB;
   text-align: center;
-  /* display: flex;
-  align-items: center; */
-}
-#page-title {
-  font-family: 'Work Sans', sans-serif;
-  color: #FF87C5;
-  font-size: 47px;
-}
-
-.container {
   grid-template-columns: 50px 50px auto 50px 50px;
   grid-template-rows: 25% 25% 100px auto auto;
   grid-template-areas:
@@ -23,6 +13,14 @@ body {
     "time time time time"
     "footer footer footer footer";
 }
+#page-title {
+  font-family: 'Work Sans', sans-serif;
+  color: #FF87C5;
+  font-size: 47px;
+  grid-area: footer;
+}
+
+
 button {
   color: white;
   border: none;
@@ -45,6 +43,13 @@ button {
   text-align: center;
   line-height: 1.1;
   position: relative;
+}
+
+#break-increment{
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: span 2;
 }
 
 #iconBdown {
@@ -73,10 +78,6 @@ button {
   align-content: center;
 }
 #iconBup{
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: span 2;
   position: absolute;
   top: 65%;
   left: 50%;
