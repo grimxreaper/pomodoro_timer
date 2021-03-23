@@ -180,57 +180,75 @@ class App extends React.Component {
           <div id="timer-label">
             <h2 id="mainLabel"> you got this! </h2>
           </div>
-          <div className="container">
-          <button id="break-decrement" onClick={this.onClick}>
-            <FontAwesomeIcon icon={faSortDown} id="iconBdown" onClick={this.break_decrement}/>
-          </button>
-          <button id="break-increment" onClick={this.onClick}>
-            <FontAwesomeIcon icon={faSortUp} id="iconBup" onClick={this.break_increment} />
-          </button>
-          <div id="break-length" className="break-label">
-            <div id="break-label"> Break Length: {this.state.break_length} mins</div>
+          <div className="topContainer">
+            <div id="time-left">
+              <h4 class="timer">
+                {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
+              </h4>
+            </div>
           </div>
-          <button id="session-decrement" onClick={this.onClick}>
-            <FontAwesomeIcon icon={faSortDown} id="iconSdown"onClick={this.session_decrement} />
-          </button>
-          <button id="session-increment" onClick={this.onClick}>
-            <FontAwesomeIcon icon={faSortUp} id="iconSup" onClick={this.session_increment}/>
-          </button>
-          <div id="session-length" className="session-label">
-            <div id="session-label">
-              Session Length: {this.state.session_length} mins
+          <div className="midContainer">
+            <button
+              id="start_stop"
+              class="start"
+              onClick={this.onClick}
+              onClick={this.start_stop.bind(this)}
+            > Start/Stop
+            </button>
+            <button class="reset" id="reset" onClick={this.onClick}>
+              Reset </button>
+            <audio
+              src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
+              id="beep"
+              ref={this.audio}
+              preload="auto"
+            />
+          </div>
+          
+          <div className="container">
+            <button id="break-decrement" onClick={this.onClick}>
+              <FontAwesomeIcon
+                icon={faSortDown}
+                id="iconBdown"
+                onClick={this.break_decrement}
+              />
+            </button>
+            <button id="break-increment" onClick={this.onClick}>
+              <FontAwesomeIcon
+                icon={faSortUp}
+                id="iconBup"
+                onClick={this.break_increment}
+              />
+            </button>
+            <div id="break-length" className="break-label">
+              <div id="break-label">
+                {" "}
+                Break Length: {this.state.break_length} mins
+              </div>
+            </div>
+            <button id="session-decrement" onClick={this.onClick}>
+              <FontAwesomeIcon
+                icon={faSortDown}
+                id="iconSdown"
+                onClick={this.session_decrement}
+              />
+            </button>
+            <button id="session-increment" onClick={this.onClick}>
+              <FontAwesomeIcon
+                icon={faSortUp}
+                id="iconSup"
+                onClick={this.session_increment}
+              />
+            </button>
+            <div id="session-length" className="session-label">
+              <div id="session-label">
+                Session Length: {this.state.session_length} mins
+              </div>
             </div>
           </div>
           
-
-          <div id="time-left">
-            <h4 class="timer">
-              {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
-            </h4>
-          </div>
-
-          <button
-            id="start_stop"
-            class="start"
-            onClick={this.onClick}
-            onClick={this.start_stop.bind(this)}
-          >
-            {" "}
-            Start/Stop
-          </button>
-          <button class="reset" id="reset" onClick={this.onClick}>
-            {" "}
-            Reset{" "}
-          </button>
-
-          <audio
-            src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
-            id="beep"
-            ref={this.audio}
-            preload="auto"
-          />
+          
         </div>
-      </div>
       </div>
     );
   }

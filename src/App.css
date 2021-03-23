@@ -34,19 +34,25 @@ button {
   position: relative;
 }
 
-.container {
+.topContainer {
   display: flex;
   flex-flow: row wrap-reverse;
   align-items: center;
   align-content: center;
-  justify-content: space-around;
+  justify-content: center;
   justify-self: center;
   padding: 0;
   margin: 0;
-
-
-  /* align-content: space-around; */
-
+}
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  align-content: center;
+  justify-content: center;
+  justify-self: center;
+  padding: 0;
+  margin: 0;
 }
 .break-label {
 display: flex;
@@ -157,17 +163,18 @@ h2 {
   height: 70px;
   margin: 20px auto 10px auto;
   text-align: center;
+  align-self: flex-end;
 }
 
 .start {
   padding: 8px;
-  margin: 10px 10px 10px auto;
+  /* margin: 10px 10px 10px auto; */
   font-size: 15px;
+
 }
 .reset {
   padding: 8px;
-  margin: 10px 10px 10px auto;
+  /* margin: 10px 10px 10px auto; */
   font-size: 15px;
-  display: flex;
-  align-self: flex-start;
+
 }
