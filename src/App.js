@@ -183,37 +183,42 @@ class App extends React.Component {
         </div>
 
         <button id="break-decrement" onClick={this.onClick}>
-         less break
         <FontAwesomeIcon icon={faSortDown} id="icondown"/>
         </button>
 
         <button id="break-increment" onClick={this.onClick}>
-         break
+         
          <FontAwesomeIcon icon={faSortUp} />
         </button>
+        <div id="break-length">
+    
+          <div id="break-label"> Break Length: {this.state.break_length}</div>
+        </div>
 
         <button id="session-decrement" onClick={this.onClick}>
-          sesh
+          
           <FontAwesomeIcon icon={faSortDown} />
         </button>
-
         <button id="session-increment" onClick={this.onClick}>
-          sesh
+        
           <FontAwesomeIcon icon={faSortUp} />
         </button>
 
+        <div id="session-length">
+          <div id="session-label">Session Length: {this.state.session_length} </div>
+        </div>
 
-        <div id="break-length">
+        {/* <div id="break-length">
           {this.state.break_length}
           <div id="break-label">Break Length</div>
-        </div>
-        <div id="session-length">
+        </div> */}
+        {/* <div id="session-length">
           {this.state.session_length}
           <div id="session-label">Session Length</div>
-        </div>
+        </div> */}
         <div id="time-left">
           <h4 class="timer">
-            Time left: {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
+           {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
           </h4>
         </div>
 
