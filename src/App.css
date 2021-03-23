@@ -13,6 +13,16 @@ body {
   font-size: 47px;
 }
 
+.container {
+  grid-template-columns: 50px 50px auto 50px 50px;
+  grid-template-rows: 25% 25% 100px auto auto;
+  grid-template-areas:
+    "header header header header"
+    "button time time button"
+    "button time time button"
+    "time time time time"
+    "footer footer footer footer";
+}
 button {
   color: white;
   border: none;
@@ -23,7 +33,7 @@ button {
   font-family: 'Open Sans', sans-serif;
   
   padding: 0.25em 0.75em;
-  min-width: 10ch;
+  min-width: 7ch;
   min-height: 44px;
 
   margin: 10px;
@@ -94,8 +104,10 @@ h2 {
 .start {
   padding: 8px;
   margin: 10px 10px 10px auto;
+  font-size: 15px;
 }
 .reset {
   padding: 8px;
   margin: 10px 10px 10px auto;
+  font-size: 15px;
 }
