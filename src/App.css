@@ -36,11 +36,23 @@ button {
 
 .container {
   display: flex;
-  flex-wrap: wrap;
-  align-items: flex-start;
-  align-content: space-around;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: center;
+  justify-self: center;
+
+  /* align-content: space-around; */
+
+}
+.break-label {
+display: flex;
+flex-direction: column;
 }
 
+.session-label{
+  display: flex;
+  flex-direction: column;
+}
 #break-decrement
 #break-increment {
   display: flex;

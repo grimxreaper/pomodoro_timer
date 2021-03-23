@@ -187,7 +187,7 @@ class App extends React.Component {
           <button id="break-increment" onClick={this.onClick}>
             <FontAwesomeIcon icon={faSortUp} id="iconBup" onClick={this.break_increment} />
           </button>
-          <div id="break-length">
+          <div id="break-length" className="break-label">
             <div id="break-label"> Break Length: {this.state.break_length} mins</div>
           </div>
           <button id="session-decrement" onClick={this.onClick}>
@@ -196,12 +196,12 @@ class App extends React.Component {
           <button id="session-increment" onClick={this.onClick}>
             <FontAwesomeIcon icon={faSortUp} id="iconSup" onClick={this.session_increment}/>
           </button>
-          <div id="session-length">
+          <div id="session-length" className="session-label">
             <div id="session-label">
               Session Length: {this.state.session_length} mins
             </div>
           </div>
-          </div>
+          
 
           <div id="time-left">
             <h4 class="timer">
@@ -230,6 +230,7 @@ class App extends React.Component {
             preload="auto"
           />
         </div>
+      </div>
       </div>
     );
   }
