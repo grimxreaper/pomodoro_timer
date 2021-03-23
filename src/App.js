@@ -91,7 +91,7 @@ class App extends React.Component {
   };
 
   start_stop = () => {
-    document.getElementById("mainLabel").innerHTML = "Session";
+    document.getElementById("mainLabel").innerHTML = "session in progress";
     if (this.state.countdown === false) {
       this.setState({
         countdown: true,
@@ -178,7 +178,7 @@ class App extends React.Component {
         <div>
           <h1 id="page-title">Pomodoro Timer</h1>
           <div id="timer-label">
-            <h2 id="mainLabel"> Session In Progress </h2>
+            <h2 id="mainLabel"> you got this! </h2>
           </div>
           <div className="container">
           <button id="break-decrement" onClick={this.onClick}>

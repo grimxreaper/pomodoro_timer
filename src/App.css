@@ -4,28 +4,13 @@
 body {
   background-color: #FFFAFB;
   text-align: center;
-  display: grid;
-  grid-template-columns: 50px 50px auto 50px 50px;
-  grid-template-rows: 25% 25% 100px auto auto;
-  grid-template-areas:
-    "header header header header"
-    "button time time button"
-    "button time time button"
-    "time time time time"
-    "footer footer footer footer";
+
 }
 #page-title {
   font-family: 'Work Sans', sans-serif;
   color: #FF87C5;
   font-size: 47px;
-  display: grid;
-  grid-column-start: 3;
-  grid-column-end: 3;
-  grid-row-start: 1;
-  grid-row-end: 1;
-  justify-self: stretch;
 }
-
 
 button {
   color: white;
@@ -49,14 +34,6 @@ button {
   text-align: center;
   line-height: 1.1;
   position: relative;
-}
-
-#break-increment{
-  display: grid;
-  grid-column-start: 1;
-  grid-column-end: 3;
-  grid-row-start: 2;
-  grid-row-end: span 2;
 }
 
 #iconBdown {
