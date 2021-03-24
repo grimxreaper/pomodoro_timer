@@ -12,14 +12,16 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      break_length: 1,
-      session_length: 1,
+      break_length: 5,
+      session_length: 25,
       minutes: 1,
       play: false,
       seconds: 0,
       cycle: "session",
       countdown: false,
+      clockCount: 25 * 60,
     };
+
   }
 
 
@@ -95,87 +97,111 @@ class App extends React.Component {
   };
 
   start_stop = () => {
-    document.getElementById("mainLabel").innerHTML = "session in progress";
-    if (this.state.countdown === false) {
-      this.setState({
-        countdown: true,
-      });
+    const { countdown } = this.state;
 
-      this.myInterval = setInterval(() => {
-        const { seconds, minutes } = this.state;
+    if (countdown) {
+      clearInterval(this.loop);
+      this.setState({ countdown : false });
+    } else {
+      this.setState({ countdown : true });
+      
+      this.loop = setInterval(() => {
+        const {
+          break_length,
+          session_length,
+          minutes,
+          play,
+          seconds,
+          cycle,
+          countdown,
+          clockCount,
+        } = this.state;
 
-        if (seconds > 0) {
-          this.setState(({ seconds }) => ({
-            seconds: seconds - 1,
-          }));
+        if (clockCount === 0) {
+          this.setState({
+            cycle: (cycle === 'Session') ? 'Break' : 'Session',
+            clockCount: (cycle === 'Session') ? (break_length * 60) : 
+            (session_length * 60)
+          });
+          this.togglePlay();
         }
-        if (seconds === 0) {
-          if (minutes === 0) {
-            if (this.state.cycle === "session") {
-              this.setState({ cycle: "break" });
-              this.start_break();
-              clearInterval(this.myInterval);
-            }
-          } else {
-            this.setState(({ minutes }) => ({
-              minutes: minutes - 1,
-              seconds: 59,
-            }));
-          }
-        }
+
       }, 100);
-    } else if (this.state.countdown === true) {
-      this.setState({
-        countdown: false,
-      });
-      {
-        clearInterval(this.myInterval);
-      }
+    
     }
-  };
-
-  //tried this as well
-  pause_beep = () => {
-    this.audio.pause()
   }
 
-  start_break = () => {
-    if (this.state.cycle === "break") {
-      this.togglePlay();
-      //what I've tried: 
-      //this.state.play === false ? this.audio.pause() : this.audio.play();
-      // this.pause_beep();
-      // setTimeout(this.audio.pause(), 2000)
-      // this.audio.pause()
-      // {this.state.play ? this.pauseSong() : this.playSong()}
-      // this.setState({ play: false });
-      let label = (document.getElementById("mainLabel").innerHTML =
-        "Break Time");
-      this.breakTimer = setInterval(() => {
-        const { seconds, minutes, break_length } = this.state;
-        if (seconds > 0) {
-          this.setState(({ seconds }) => ({
-            seconds: seconds - 1,
-          }));
-        }
-        if (seconds === 0) {
-          if (break_length === 0) {
-            this.start_stop();
-            console.log(this.state.session_length)
-            clearInterval(this.break_Timer);
-          } else {
-            let newMinuteValue = break_length - 1;
-            this.setState(({ minutes }) => ({
-              minutes: newMinuteValue,
-              break_length: newMinuteValue, //we need this here so that it doesn't
-              //keep resetting the minutes value to the value stored
-              seconds: 59,
-            }));
-          }
-        }
-      }, 100);
-    }
-  };
+  //   document.getElementById("mainLabel").innerHTML = "session in progress";
+  //   if (this.state.countdown === false) {
+  //     this.setState({
+  //       countdown: true,
+  //     });
+
+  //     this.myInterval = setInterval(() => {
+  //       const { seconds, minutes } = this.state;
+
+  //       if (seconds > 0) {
+  //         this.setState(({ seconds }) => ({
+  //           seconds: seconds - 1,
+  //         }));
+  //       }
+  //       if (seconds === 0) {
+  //         if (minutes === 0) {
+  //           if (this.state.cycle === "session") {
+  //             this.setState({ cycle: "break" });
+  //             this.start_break();
+  //             clearInterval(this.myInterval);
+  //           }
+  //         } else {
+  //           this.setState(({ minutes }) => ({
+  //             minutes: minutes - 1,
+  //             seconds: 59,
+  //           }));
+  //         }
+  //       }
+  //     }, 100);
+  //   } else if (this.state.countdown === true) {
+  //     this.setState({
+  //       countdown: false,
+  //     });
+  //     {
+  //       clearInterval(this.myInterval);
+  //     }
+  //   }
+  // };
+
+
+  // start_break = () => {
+  //   if (this.state.cycle === "break") {
+  //     this.togglePlay();
+
+  //     let label = (document.getElementById("mainLabel").innerHTML =
+  //       "Break Time");
+  //     this.breakTimer = setInterval(() => {
+  //       const { seconds, minutes, break_length } = this.state;
+  //       if (seconds > 0) {
+  //         this.setState(({ seconds }) => ({
+  //           seconds: seconds - 1,
+  //         }));
+  //       }
+  //       if (seconds === 0) {
+  //         if (break_length === 0) {
+  //           this.start_stop();
+  //           console.log(this.state.session_length)
+  //           clearInterval(this.break_Timer);
+  //         } else {
+  //           let newMinuteValue = break_length - 1;
+  //           this.setState(({ minutes }) => ({
+  //             minutes: newMinuteValue,
+  //             break_length: newMinuteValue, //we need this here so that it doesn't
+  //             //keep resetting the minutes value to the value stored
+  //             seconds: 59,
+  //           }));
+  //         }
+  //       }
+  //     }, 100);
+  //   }
+  // };
 
   reset = () => {
     this.setState({
