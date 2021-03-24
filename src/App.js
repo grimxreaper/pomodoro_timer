@@ -298,10 +298,10 @@ class App extends React.Component {
           
           <div className="flex">
             <button id="start_stop" onClick={this.start_stop}>
-              <i className={`fas fa-${play ? 'pause': 'play'}`} />
+              play/pause
             </button>
             <button id="reset" onClick={this.reset}>
-              <i className="fas fa-sync" />
+              reset
             </button>
              <audio
               src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
@@ -412,18 +412,21 @@ const SetTimer = (props) => {
       </h2>
       <div className="flex actions-wrapper">
         <button id={`${id}-decrement`} onClick={props.handleDecrease}>
-          <i className="fas fa-minus" />
+          <FontAwesomeIcon
+          icon={faSortDown}
+          id="iconSdown"
+          onClick={props.handleDecrease}
+         />
         </button>
         
         <span id={`${id}-length`}>{props.count}</span>
         
         <button id={`${id}-increment`} onClick={props.handleIncrease}>
-          {/* <i className="fas fa-plus" /> */}
-         <FontAwesomeIcon
-                icon={faSortUp}
-                id="iconSup"
-                onClick={props.handleIncrease}
-              />
+          <FontAwesomeIcon
+            icon={faSortUp}
+            id="iconSup"
+            onClick={props.handleIncrease}
+          />
         </button>
       </div>
     </div>
