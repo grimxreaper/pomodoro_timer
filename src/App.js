@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortUp, faSortDown } from "@fortawesome/free-solid-svg-icons";
 
 
-useAudio = url => {
+const useAudio = url => {
   const [audio] = useState(new Audio('https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav'));
   const [playing, setPlaying] = useState(false);
 
@@ -18,7 +18,7 @@ useAudio = url => {
     [playing]
   );
 
-  useEffect(() => {
+ useEffect(() => {
     audio.addEventListener('ended', () => setPlaying(false));
     return () => {
       audio.removeEventListener('ended', () => setPlaying(false));
@@ -28,9 +28,8 @@ useAudio = url => {
   return [playing, toggle];
 };
 
-
   
-Player = ({ url }) => {
+const Player = ({ url }) => {
   const [playing, toggle] = useAudio('https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav');
 
   return (
@@ -60,25 +59,25 @@ class App extends React.Component {
 
 
 
-  audio = new Audio(
-    "https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
-  );
+  // audio = new Audio(
+  //   "https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
+  // );
 
-  componentDidMount() {
-    this.audio.addEventListener("ended", () => this.setState({ play: false }));
-  }
+  // componentDidMount() {
+  //   this.audio.addEventListener("ended", () => this.setState({ play: false }));
+  // }
 
-  componentWillUnmount() {
-    this.audio.removeEventListener("ended", () =>
-      this.setState({ play: false })
-    );
-  }
+  // componentWillUnmount() {
+  //   this.audio.removeEventListener("ended", () =>
+  //     this.setState({ play: false })
+  //   );
+  // }
 
-  togglePlay = () => {
-    this.setState({ play: !this.state.play }, () => {
-      this.state.play ? this.audio.play() : this.audio.pause();
-    });
-  };
+  // togglePlay = () => {
+  //   this.setState({ play: !this.state.play }, () => {
+  //     this.state.play ? this.audio.play() : this.audio.pause();
+  //   });
+  // };
 
   onClick = (button) => {
     const id = button.target.id;
@@ -178,7 +177,8 @@ class App extends React.Component {
 
   start_break = () => {
     if (this.state.cycle === "break") {
-      this.togglePlay();
+      // this.togglePlay();
+      this.useAudio();
       //what I've tried: 
       //this.state.play === false ? this.audio.pause() : this.audio.play();
       // this.pause_beep();
