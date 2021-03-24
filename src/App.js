@@ -150,7 +150,7 @@ class App extends React.Component {
       let label = (document.getElementById("mainLabel").innerHTML =
         "Break Time");
       this.breakTimer = setInterval(() => {
-        const { break_length, minutesBreak, secondsBreak } = this.state;
+        const { minutes, seconds, break_length, minutesBreak, secondsBreak } = this.state;
         if (secondsBreak > 0) {
           this.setState(({ secondsBreak }) => ({
             secondsBreak: secondsBreak - 1,
@@ -162,10 +162,11 @@ class App extends React.Component {
             console.log('yes we are here')
             clearInterval(this.break_Timer);
           } else {
-            let newMinuteValue = minutesBreak - 1;
-            this.setState(({ minutesBreak }) => ({
-              minutesBreak: newMinutesValue,
-              break_length: newMinuteValue, //just don't set break_length equal to newMinuteValue here and try that too
+            let newMinuteValue = break_length - 1;
+            this.setState(({ minutes }) => ({
+              minutes: newMinuteValue,
+              break_length: newMinuteValue,
+               //just don't set break_length equal to newMinuteValue here and try that too
               seconds: 59,
             }));
           }
