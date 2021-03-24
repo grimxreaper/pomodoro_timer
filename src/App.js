@@ -10,14 +10,14 @@ class App extends React.Component {
     super(props);
 
     this.state = {
-      break_length: 5,
-      session_length: 25,
+      break_length: 2,
+      session_length: 2,
       minutes: 1,
       play: false,
       seconds: 0,
       cycle: "session",
       countdown: false,
-      clockCount: 25 * 60,
+      clockCount: 2 * 60,
     };
   }
 
@@ -59,38 +59,38 @@ class App extends React.Component {
     }
   };
 
-  // break_decrement = () => {
-  //   if (this.state.break_length > 0) {
-  //     this.setState({
-  //       break_length: this.state.break_length - 1,
-  //     });
-  //   }
-  // };
+  break_decrement = () => {
+    if (this.state.break_length > 0) {
+      this.setState({
+        break_length: this.state.break_length - 1,
+      });
+    }
+  };
 
-  // break_increment = () => {
-  //   if (this.state.break_length < 60) {
-  //     this.setState({
-  //       break_length: this.state.break_length + 1,
-  //     });
-  //   }
-  // };
+  break_increment = () => {
+    if (this.state.break_length < 60) {
+      this.setState({
+        break_length: this.state.break_length + 1,
+      });
+    }
+  };
 
-  // session_decrement = () => {
-  //   if (this.state.session_length > 0)
-  //     this.setState({
-  //       session_length: this.state.session_length - 1,
-  //       minutes: this.state.session_length - 1,
-  //     });
-  // };
+  session_decrement = () => {
+    if (this.state.session_length > 0)
+      this.setState({
+        session_length: this.state.session_length - 1,
+        minutes: this.state.session_length - 1,
+      });
+  };
 
-  // session_increment = () => {
-  //   if (this.state.session_length < 60) {
-  //     this.setState({
-  //       session_length: this.state.session_length + 1,
-  //       minutes: this.state.session_length + 1,
-  //     });
-  //   }
-  // };
+  session_increment = () => {
+    if (this.state.session_length < 60) {
+      this.setState({
+        session_length: this.state.session_length + 1,
+        minutes: this.state.session_length + 1,
+      });
+    }
+  };
 
   handleLengthChange = (count, timerType) => {
     const { 
@@ -253,7 +253,34 @@ class App extends React.Component {
   };
 
   render() {
-    const { minutes, seconds } = this.state;
+    const { 
+      break_length,
+      session_length,
+      minutes,
+      play,
+      seconds,
+      cycle,
+      countdown,
+      clockCount,
+    } = this.state;
+    
+    const breakProps = {
+      title: 'Break',
+      count: break_length,
+      handleDecrease: () => this.handleLengthChange(-1, 'break'),
+      handleIncrease: () => this.handleLengthChange(1, 'break')
+    }
+    
+    const sessionProps = {
+      title: 'Session',
+      count: session_length,
+      handleDecrease: () => this.handleLengthChange(-1, 'session'),
+      handleIncrease: () => this.handleLengthChange(1, 'session'),
+    }
+
+
+
+
     return (
       <div>
         <div>
@@ -262,6 +289,8 @@ class App extends React.Component {
             <h2 id="mainLabel"> you got this! </h2>
           </div>
           <div className="topContainer">
+          <div  {...breakProps} />
+          <div {...sessionProps} />
             <div id="time-left">
               {this.state.cycle}
               <h4 class="timer">
@@ -274,7 +303,7 @@ class App extends React.Component {
             <button
               id="start_stop"
               class="start"
-              onClick={this.onClick}
+              onClick={this.start_stop}
               onClick={this.start_stop.bind(this)}
             >
               {" "}
@@ -341,5 +370,27 @@ class App extends React.Component {
   }
 }
 
+const SetTimer = (props) => {
+  const id = props.title.toLowerCase();
+  
+  return (
+    <div className="timer-container">
+      <h2 id={`${id}-label`}>
+        {props.title} Length
+      </h2>
+      <div className="flex actions-wrapper">
+        <button id={`${id}-decrement`} onClick={props.handleDecrease}>
+          <i className="fas fa-minus" />
+        </button>
+        
+        <span id={`${id}-length`}>{props.count}</span>
+        
+        <button id={`${id}-increment`} onClick={props.handleIncrease}>
+          <i className="fas fa-plus" />
+        </button>
+      </div>
+    </div>
+  );
+}
 ReactDOM.render(<App />, document.getElementById("app"));
 export default App;
