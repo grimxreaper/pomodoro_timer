@@ -164,8 +164,8 @@ class App extends React.Component {
           } else {
             let newMinuteValue = minutesBreak - 1;
             this.setState(({ minutesBreak }) => ({
-              minutesBreak: minutesBreak,
-              // break_length: newMinuteValue, //just don't set break_length equal to newMinuteValue here and try that too
+              minutesBreak: newMinutesValue,
+              break_length: newMinuteValue, //just don't set break_length equal to newMinuteValue here and try that too
               seconds: 59,
             }));
           }
