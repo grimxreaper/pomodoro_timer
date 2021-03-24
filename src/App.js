@@ -80,6 +80,7 @@ class App extends React.Component {
       this.setState({
         session_length: this.state.session_length - 1,
         minutes: this.state.session_length - 1,
+        clockCount: this.state.clockCount - 1,
       });
   };
 
@@ -262,6 +263,8 @@ class App extends React.Component {
       cycle,
       countdown,
       clockCount,
+      handleDecrease,
+      handleIncrease
     } = this.state;
     
     const breakProps = {
@@ -278,119 +281,153 @@ class App extends React.Component {
       handleIncrease: () => this.handleLengthChange(1, 'session'),
     }
 
-
-
-
     return (
       <div>
-        <div>
           <h1 id="page-title">Pomodoro Timer</h1>
           <div id="timer-label">
-            <h2 id="mainLabel"> you got this! </h2>
-          </div>
-          <div className="topContainer">
-          <div  {...breakProps} />
-          <div {...sessionProps} />
-            <div id="time-left">
-              {this.state.cycle}
-              <h4 class="timer">
-                {this.convertToTime(this.state.clockCount)}
-                {/* {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "} */}
-              </h4>
-            </div>
-          </div>
-          <div className="midContainer">
-            <button
-              id="start_stop"
-              class="start"
-              onClick={this.start_stop}
-              onClick={this.start_stop.bind(this)}
-            >
-              {" "}
-              Start/Stop
+             <h2 id="mainLabel"> you got this! </h2></div>
+        <div className="flex">
+          <SetTimer {...breakProps} />
+          <SetTimer {...sessionProps} />
+        </div>
+        
+        <div id="time-left">
+          <h1 id="timer-label">{cycle}</h1>
+          <span className="timer">{this.convertToTime(clockCount)}</span>
+          
+          
+          <div className="flex">
+            <button id="start_stop" onClick={this.start_stop}>
+              <i className={`fas fa-${play ? 'pause': 'play'}`} />
             </button>
-            <button class="reset" id="reset" onClick={this.onClick}>
-              Reset{" "}
+            <button id="reset" onClick={this.reset}>
+              <i className="fas fa-sync" />
             </button>
-            <audio
+             <audio
               src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
               id="beep"
               ref={this.audio}
               preload="auto"
             />
           </div>
-
-          <div className="container">
-            <button id="break-decrement" onClick={this.onClick}>
-              <FontAwesomeIcon
-                icon={faSortDown}
-                id="iconBdown"
-                onClick={this.break_decrement}
-              />
-            </button>
-            <button id="break-increment" onClick={this.onClick}>
-              <FontAwesomeIcon
-                icon={faSortUp}
-                id="iconBup"
-                onClick={this.break_increment}
-              />
-            </button>
-
-            <button id="session-decrement" onClick={this.onClick}>
-              <FontAwesomeIcon
-                icon={faSortDown}
-                id="iconSdown"
-                onClick={this.session_decrement}
-              />
-            </button>
-            <button id="session-increment" onClick={this.onClick}>
-              <FontAwesomeIcon
-                icon={faSortUp}
-                id="iconSup"
-                onClick={this.session_increment}
-              />
-            </button>
-          </div>
-          <div className="labelContainer">
-            <div id="break-length" className="break-label">
-              <div id="break-label">
-                {" "}
-                Break Length: {this.state.break_length} mins
-              </div>
-            </div>
-            <div id="session-length" className="session-label">
-              <div id="session-label">
-                Session Length: {this.state.session_length} mins
-              </div>
-            </div>
-          </div>
         </div>
-      </div>
-    );
+      </div>);
+
+    // return (
+    //   <div>
+    //     <div>
+    //       <h1 id="page-title">Pomodoro Timer</h1>
+    //       <div id="timer-label">
+    //         <h2 id="mainLabel"> you got this! </h2>
+    //       </div>
+    //       <div className="topContainer">
+    //       <div  {...breakProps} />
+    //       <div {...sessionProps} />
+    //         <div id="time-left">
+    //           {this.state.cycle}
+    //           <h4 class="timer">
+    //             {this.convertToTime(this.state.clockCount)}
+    //             {/* {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "} */}
+    //           </h4>
+    //         </div>
+    //       </div>
+    //       <div className="midContainer">
+    //         <button
+    //           id="start_stop"
+    //           class="start"
+    //           onClick={this.start_stop}
+    //           onClick={this.start_stop.bind(this)}
+    //         >
+    //           {" "}
+    //           Start/Stop
+    //         </button>
+    //         <button class="reset" id="reset" onClick={this.onClick}>
+    //           Reset{" "}
+    //         </button>
+    //         <audio
+    //           src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
+    //           id="beep"
+    //           ref={this.audio}
+    //           preload="auto"
+    //         />
+    //       </div>
+
+    //       <div className="container">
+    //         <button id="break-decrement" onClick={this.onClick}>
+    //           <FontAwesomeIcon
+    //             icon={faSortDown}
+    //             id="iconBdown"
+    //             onClick={this.break_decrement}
+    //           />
+    //         </button>
+    //         <button id="break-increment" onClick={this.onClick}>
+    //           <FontAwesomeIcon
+    //             icon={faSortUp}
+    //             id="iconBup"
+    //             onClick={this.break_increment}
+    //           />
+    //         </button>
+
+    //         <button id="session-decrement" onClick={this.onClick}>
+    //           <FontAwesomeIcon
+    //             icon={faSortDown}
+    //             id="iconSdown"
+    //             onClick={this.handleDecrease}
+    //           />
+    //         </button>
+    //         <button id="session-increment" onClick={this.onClick}>
+    //           <FontAwesomeIcon
+    //             icon={faSortUp}
+    //             id="iconSup"
+    //             onClick={this.session_increment}
+    //           />
+    //         </button>
+    //       </div>
+    //       <div className="labelContainer">
+    //         <div id="break-length" className="break-label">
+    //           <div id="break-label">
+    //             {" "}
+    //             Break Length: {this.state.break_length} mins
+    //           </div>
+    //         </div>
+    //         <div id="session-length" className="session-label">
+    //           <div id="session-label">
+    //             Session Length: {this.state.session_length} mins
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </div>
+    //   </div>
+    // );
   }
 }
 
-// const SetTimer = (props) => {
-//   const id = props.title.toLowerCase();
+const SetTimer = (props) => {
+  const id = props.title.toLowerCase();
   
-//   return (
-//     <div className="timer-container">
-//       <h2 id={`${id}-label`}>
-//         {props.title} Length
-//       </h2>
-//       <div className="flex actions-wrapper">
-//         <button id={`${id}-decrement`} onClick={props.handleDecrease}>
-//           <i className="fas fa-minus" />
-//         </button>
+  return (
+    <div className="timer-container">
+      <h2 id={`${id}-label`}>
+        {props.title} Length
+      </h2>
+      <div className="flex actions-wrapper">
+        <button id={`${id}-decrement`} onClick={props.handleDecrease}>
+          <i className="fas fa-minus" />
+        </button>
         
-//         <span id={`${id}-length`}>{props.count}</span>
+        <span id={`${id}-length`}>{props.count}</span>
         
-//         <button id={`${id}-increment`} onClick={props.handleIncrease}>
-//           <i className="fas fa-plus" />
-//         </button>
-//       </div>
-//     </div>
-//   );
-// }
+        <button id={`${id}-increment`} onClick={props.handleIncrease}>
+          {/* <i className="fas fa-plus" /> */}
+         <FontAwesomeIcon
+                icon={faSortUp}
+                id="iconSup"
+                onClick={props.handleIncrease}
+              />
+        </button>
+      </div>
+    </div>
+  );
+}
 ReactDOM.render(<App />, document.getElementById("app"));
 export default App;
