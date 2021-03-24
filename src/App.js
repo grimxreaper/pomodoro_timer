@@ -5,6 +5,42 @@ import { getByDisplayValue } from "@testing-library/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortUp, faSortDown } from "@fortawesome/free-solid-svg-icons";
 
+
+useAudio = url => {
+  const [audio] = useState(new Audio('https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav'));
+  const [playing, setPlaying] = useState(false);
+
+  const toggle = () => setPlaying(!playing);
+
+  useEffect(() => {
+      playing ? audio.play() : audio.pause();
+    },
+    [playing]
+  );
+
+  useEffect(() => {
+    audio.addEventListener('ended', () => setPlaying(false));
+    return () => {
+      audio.removeEventListener('ended', () => setPlaying(false));
+    };
+  }, []);
+
+  return [playing, toggle];
+};
+
+
+  
+Player = ({ url }) => {
+  const [playing, toggle] = useAudio('https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav');
+
+  return (
+    <div>
+      <button onClick={toggle}>{playing ? "Pause" : "Play"}</button>
+    </div>
+  );
+};
+
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -20,38 +56,6 @@ class App extends React.Component {
     };
   }
 
-
-  useAudio = url => {
-    const [audio] = useState(new Audio(url));
-    const [playing, setPlaying] = useState(false);
-  
-    const toggle = () => setPlaying(!playing);
-  
-    useEffect(() => {
-        playing ? audio.play() : audio.pause();
-      },
-      [playing]
-    );
-  
-    useEffect(() => {
-      audio.addEventListener('ended', () => setPlaying(false));
-      return () => {
-        audio.removeEventListener('ended', () => setPlaying(false));
-      };
-    }, []);
-  
-    return [playing, toggle];
-  };
-  
-  Player = ({ url }) => {
-    const [playing, toggle] = useAudio(url);
-
-    return (
-      <div>
-        <button onClick={toggle}>{playing ? "Pause" : "Play"}</button>
-      </div>
-    );
-  };
 
 
 
