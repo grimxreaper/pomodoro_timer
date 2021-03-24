@@ -59,38 +59,67 @@ class App extends React.Component {
     }
   };
 
-  break_decrement = () => {
-    if (this.state.break_length > 0) {
-      this.setState({
-        break_length: this.state.break_length - 1,
-      });
-    }
-  };
+  // break_decrement = () => {
+  //   if (this.state.break_length > 0) {
+  //     this.setState({
+  //       break_length: this.state.break_length - 1,
+  //     });
+  //   }
+  // };
 
-  break_increment = () => {
-    if (this.state.break_length < 60) {
-      this.setState({
-        break_length: this.state.break_length + 1,
-      });
-    }
-  };
+  // break_increment = () => {
+  //   if (this.state.break_length < 60) {
+  //     this.setState({
+  //       break_length: this.state.break_length + 1,
+  //     });
+  //   }
+  // };
 
-  session_decrement = () => {
-    if (this.state.session_length > 0)
-      this.setState({
-        session_length: this.state.session_length - 1,
-        minutes: this.state.session_length - 1,
-      });
-  };
+  // session_decrement = () => {
+  //   if (this.state.session_length > 0)
+  //     this.setState({
+  //       session_length: this.state.session_length - 1,
+  //       minutes: this.state.session_length - 1,
+  //     });
+  // };
 
-  session_increment = () => {
-    if (this.state.session_length < 60) {
-      this.setState({
-        session_length: this.state.session_length + 1,
-        minutes: this.state.session_length + 1,
-      });
+  // session_increment = () => {
+  //   if (this.state.session_length < 60) {
+  //     this.setState({
+  //       session_length: this.state.session_length + 1,
+  //       minutes: this.state.session_length + 1,
+  //     });
+  //   }
+  // };
+
+  handleLengthChange = (count, timerType) => {
+    const { 
+      session_length, 
+      break_length, 
+      isPlaying, 
+      cycle
+    } = this.state;
+    
+    let newCount;
+    
+    if(timerType === 'session') {
+      newCount = session_length + count;
+    } else {
+      newCount = break_length + count;
     }
-  };
+    
+    if(newCount > 0 && newCount < 61 && !isPlaying) {
+      this.setState({
+        [`${timerType}_length`]: newCount
+      });
+      
+      if(cycle.toLowerCase() === timerType) {
+        this.setState({
+          clockCount: newCount * 60
+        })
+      }
+    }
+  }
 
   start_stop = () => {
     const { countdown } = this.state;
