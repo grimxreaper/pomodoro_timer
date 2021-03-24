@@ -130,6 +130,7 @@ class App extends React.Component {
     }
   };
 
+  //tried this as well
   pause_beep = () => {
     this.audio.pause()
   }
@@ -137,7 +138,8 @@ class App extends React.Component {
   start_break = () => {
     if (this.state.cycle === "break") {
       this.togglePlay();
-      this.state.play === false ? this.audio.pause() : this.audio.play();
+      //what I've tried: 
+      //this.state.play === false ? this.audio.pause() : this.audio.play();
       // this.pause_beep();
       // setTimeout(this.audio.pause(), 2000)
       // this.audio.pause()
