@@ -19,8 +19,6 @@ class App extends React.Component {
       seconds: 0,
       cycle: "session",
       countdown: false,
-      minutesB: 1,
-      secondsB: 0,
     };
   }
 
@@ -67,7 +65,6 @@ class App extends React.Component {
     if (this.state.break_length > 0) {
       this.setState({
         break_length: this.state.break_length - 1,
-        minutesB: this.state.break_length - 1,
       });
     }
   };
@@ -76,7 +73,6 @@ class App extends React.Component {
     if (this.state.break_length < 60) {
       this.setState({
         break_length: this.state.break_length + 1,
-        minutesB: this.state.break_length + 1,
       });
     }
   };
@@ -104,7 +100,6 @@ class App extends React.Component {
       this.setState({
         countdown: true,
       });
-    this.setState({ cycle: "session" });
 
       this.myInterval = setInterval(() => {
         const { seconds, minutes } = this.state;
@@ -129,8 +124,7 @@ class App extends React.Component {
           }
         }
       }, 100);
-    } 
-    else if (this.state.countdown === true) {
+    } else if (this.state.countdown === true) {
       this.setState({
         countdown: false,
       });
@@ -140,33 +134,42 @@ class App extends React.Component {
     }
   };
 
+  //tried this as well
+  pause_beep = () => {
+    this.audio.pause()
+  }
 
   start_break = () => {
     if (this.state.cycle === "break") {
       this.togglePlay();
-
+      //what I've tried: 
+      //this.state.play === false ? this.audio.pause() : this.audio.play();
+      // this.pause_beep();
+      // setTimeout(this.audio.pause(), 2000)
+      // this.audio.pause()
+      // {this.state.play ? this.pauseSong() : this.playSong()}
+      // this.setState({ play: false });
       let label = (document.getElementById("mainLabel").innerHTML =
         "Break Time");
       this.breakTimer = setInterval(() => {
-        const { secondsB, minutesB, break_length } = this.state;
-        if (secondsB > 0) {
-          this.setState(({ secondsB }) => ({
-            secondsB: secondsB - 1,
+        const { seconds, minutes, break_length } = this.state;
+        if (seconds > 0) {
+          this.setState(({ seconds }) => ({
+            seconds: seconds - 1,
           }));
         }
-        if (secondsB === 0) {
-          if (minutesB === 0) {
-            this.setState({countdown: false})
-            console.log(this.state.countdown)
-            
+        if (seconds === 0) {
+          if (break_length === 0) {
             this.start_stop();
+            console.log(this.state.session_length)
             clearInterval(this.break_Timer);
           } else {
-            this.setState(({ minutesB }) => ({
-              minutesB: minutesB - 1,
-              // break_length: newMinuteValue, //we need this here so that it doesn't
-              //keep resetting the minutes value to the value stored in break_length
-              secondsB: 59,
+            let newMinuteValue = break_length - 1;
+            this.setState(({ minutes }) => ({
+              minutes: newMinuteValue,
+              break_length: newMinuteValue, //we need this here so that it doesn't
+              //keep resetting the minutes value to the value stored
+              seconds: 59,
             }));
           }
         }
@@ -186,7 +189,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { minutes, seconds, minutesB, secondsB } = this.state;
+    const { minutes, seconds } = this.state;
     return (
       <div>
         <div>
@@ -200,7 +203,6 @@ class App extends React.Component {
                 {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
               </h4>
               <h4>
-                {minutesB}:{secondsB < 10 ? `0${secondsB}` : secondsB}{" "}
                 
               </h4>
             </div>
