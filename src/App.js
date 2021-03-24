@@ -167,10 +167,10 @@ class App extends React.Component {
             let newMinuteValue = break_length - 1;
             this.setState(({ minutes }) => ({
               minutes: newMinuteValue,
-              break_length: newMinuteValue,
+              break_length: newMinuteValue, //we need this here so that it doesn't
+              //keep resetting the minutes value to the value stored in break_length
               seconds: 59,
             }));
-            // this.audio.play()
           }
         }
       }, 100);
