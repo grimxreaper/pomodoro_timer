@@ -116,7 +116,7 @@ class App extends React.Component {
         if (seconds === 0) {
           if (minutes === 0) {
             if (this.state.cycle === "session") {
-              this.setState({ cycle: "break" });
+              this.setState({ cycle: "break", countdown: false });
               this.start_break();
               clearInterval(this.myInterval);
             }
@@ -141,7 +141,6 @@ class App extends React.Component {
 
   start_break = () => {
     if (this.state.cycle === "break") {
-      if (this.state.countdown === true) {
       this.togglePlay();
 
       let label = (document.getElementById("mainLabel").innerHTML =
@@ -155,13 +154,12 @@ class App extends React.Component {
         }
         if (secondsB === 0) {
           if (minutesB === 0) {
-            this.setState({ cycle: "session", countdown: false });
+            this.setState({ cycle: "session" });
 
             this.start_stop();
             console.log(this.state.countdown)
             clearInterval(this.break_Timer);
           } else {
-            // let newMinuteValue = break_length - 1;
             this.setState(({ minutesB }) => ({
               minutesB: minutesB - 1,
               // break_length: newMinuteValue, //we need this here so that it doesn't
@@ -172,7 +170,6 @@ class App extends React.Component {
         }
       }, 100);
     }
-  }
   };
 
   reset = () => {
