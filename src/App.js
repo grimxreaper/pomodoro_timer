@@ -160,6 +160,7 @@ class App extends React.Component {
         }
         if (seconds === 0) {
           if (break_length === 0) {
+            this.start_stop();
             clearInterval(this.break_Timer);
           } else {
             let newMinuteValue = break_length - 1;
