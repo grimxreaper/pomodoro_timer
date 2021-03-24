@@ -138,13 +138,10 @@ class App extends React.Component {
     }
   };
 
-  //tried this as well
-  pause_beep = () => {
-    this.audio.pause()
-  }
 
   start_break = () => {
     if (this.state.cycle === "break") {
+      if (this.state.countdown === true) {
       this.togglePlay();
 
       let label = (document.getElementById("mainLabel").innerHTML =
@@ -158,9 +155,10 @@ class App extends React.Component {
         }
         if (secondsB === 0) {
           if (minutesB === 0) {
-            this.setState({ cycle: "session" });
+            this.setState({ cycle: "session", countdown: false });
+
             this.start_stop();
-            console.log(this.state.session_length)
+            console.log(this.state.countdown)
             clearInterval(this.break_Timer);
           } else {
             // let newMinuteValue = break_length - 1;
@@ -174,6 +172,7 @@ class App extends React.Component {
         }
       }, 100);
     }
+  }
   };
 
   reset = () => {
@@ -202,7 +201,7 @@ class App extends React.Component {
                 {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
               </h4>
               <h4>
-                {minutesB}:{secondsB < 10 ? `0${seconds}` : secondsB}{" "}
+                {minutesB}:{secondsB < 10 ? `0${secondsB}` : secondsB}{" "}
                 
               </h4>
             </div>
