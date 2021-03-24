@@ -130,10 +130,19 @@ class App extends React.Component {
     }
   };
 
+  pause_beep = () => {
+    this.audio.pause()
+  }
+
   start_break = () => {
     if (this.state.cycle === "break") {
       this.togglePlay();
-      this.setState({ play: false });
+      this.state.play === false ? this.audio.pause() : this.audio.play();
+      // this.pause_beep();
+      // setTimeout(this.audio.pause(), 2000)
+      // this.audio.pause()
+      // {this.state.play ? this.pauseSong() : this.playSong()}
+      // this.setState({ play: false });
       let label = (document.getElementById("mainLabel").innerHTML =
         "Break Time");
       this.breakTimer = setInterval(() => {
