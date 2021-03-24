@@ -5,8 +5,6 @@ import { getByDisplayValue } from "@testing-library/react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSortUp, faSortDown } from "@fortawesome/free-solid-svg-icons";
 
-
-
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -21,9 +19,7 @@ class App extends React.Component {
       countdown: false,
       clockCount: 25 * 60,
     };
-
   }
-
 
   audio = new Audio(
     "https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
@@ -101,10 +97,10 @@ class App extends React.Component {
 
     if (countdown) {
       clearInterval(this.loop);
-      this.setState({ countdown : false });
+      this.setState({ countdown: false });
     } else {
-      this.setState({ countdown : true });
-      
+      this.setState({ countdown: true });
+
       this.loop = setInterval(() => {
         const {
           break_length,
@@ -119,21 +115,19 @@ class App extends React.Component {
 
         if (clockCount === 0) {
           this.setState({
-            cycle: (cycle === 'Session') ? 'Break' : 'Session',
-            clockCount: (cycle === 'Session') ? (break_length * 60) : 
-            (session_length * 60)
+            cycle: cycle === "Session" ? "Break" : "Session",
+            clockCount:
+              cycle === "Session" ? break_length * 60 : session_length * 60,
           });
           this.togglePlay();
         } else {
           this.setState({
-            clockCount: clockCount - 1
-          })
+            clockCount: clockCount - 1,
+          });
         }
-
       }, 100);
-    
     }
-  }
+  };
 
   //   document.getElementById("mainLabel").innerHTML = "session in progress";
   //   if (this.state.countdown === false) {
@@ -173,7 +167,6 @@ class App extends React.Component {
   //     }
   //   }
   // };
-
 
   // start_break = () => {
   //   if (this.state.cycle === "break") {
@@ -223,14 +216,12 @@ class App extends React.Component {
   convertToTime = (count) => {
     let minutes = Math.floor(count / 60);
     let seconds = count % 60;
-      
-    minutes = minutes < 10 ? ('0'+minutes) : minutes;
-    seconds = seconds < 10 ? ('0'+seconds) : seconds;
-    
+
+    minutes = minutes < 10 ? "0" + minutes : minutes;
+    seconds = seconds < 10 ? "0" + seconds : seconds;
+
     return `${minutes}:${seconds}`;
-  }
-
-
+  };
 
   render() {
     const { minutes, seconds } = this.state;
@@ -243,9 +234,9 @@ class App extends React.Component {
           </div>
           <div className="topContainer">
             <div id="time-left">
-            {this.state.cycle}
+              {this.state.cycle}
               <h4 class="timer">
-              {this.convertToTime(this.state.clockCount)}
+                {this.convertToTime(this.state.clockCount)}
                 {/* {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "} */}
               </h4>
             </div>
@@ -301,8 +292,8 @@ class App extends React.Component {
                 onClick={this.session_increment}
               />
             </button>
-            </div>
-            <div className="labelContainer">
+          </div>
+          <div className="labelContainer">
             <div id="break-length" className="break-label">
               <div id="break-label">
                 {" "}
@@ -314,7 +305,6 @@ class App extends React.Component {
                 Session Length: {this.state.session_length} mins
               </div>
             </div>
-
           </div>
         </div>
       </div>
@@ -324,4 +314,3 @@ class App extends React.Component {
 
 ReactDOM.render(<App />, document.getElementById("app"));
 export default App;
-
