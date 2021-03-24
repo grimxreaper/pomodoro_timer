@@ -104,6 +104,7 @@ class App extends React.Component {
       this.setState({
         countdown: true,
       });
+    this.setState({ cycle: "session" });
 
       this.myInterval = setInterval(() => {
         const { seconds, minutes } = this.state;
@@ -116,7 +117,7 @@ class App extends React.Component {
         if (seconds === 0) {
           if (minutes === 0) {
             if (this.state.cycle === "session") {
-              this.setState({ cycle: "break", countdown: false });
+              this.setState({ cycle: "break" });
               this.start_break();
               clearInterval(this.myInterval);
             }
@@ -128,7 +129,8 @@ class App extends React.Component {
           }
         }
       }, 100);
-    } else if (this.state.countdown === true) {
+    } 
+    else if (this.state.countdown === true) {
       this.setState({
         countdown: false,
       });
@@ -154,10 +156,10 @@ class App extends React.Component {
         }
         if (secondsB === 0) {
           if (minutesB === 0) {
-            this.setState({ cycle: "session" });
-
-            this.start_stop();
+            this.setState({countdown: false})
             console.log(this.state.countdown)
+            
+            this.start_stop();
             clearInterval(this.break_Timer);
           } else {
             this.setState(({ minutesB }) => ({
