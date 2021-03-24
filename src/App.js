@@ -124,6 +124,10 @@ class App extends React.Component {
             (session_length * 60)
           });
           this.togglePlay();
+        } else {
+          this.setState({
+            clockCount: clockCount - 1
+          })
         }
 
       }, 100);
@@ -204,15 +208,29 @@ class App extends React.Component {
   // };
 
   reset = () => {
+    clearInterval(this.loop);
     this.setState({
       break_length: 5,
       session_length: 25,
+      clockCount: 25 * 60,
       minutes: 25,
       seconds: 0,
       cycle: "session",
       countdown: false,
     });
   };
+
+  convertToTime = (count) => {
+    let minutes = Math.floor(count / 60);
+    let seconds = count % 60;
+      
+    minutes = minutes < 10 ? ('0'+minutes) : minutes;
+    seconds = seconds < 10 ? ('0'+seconds) : seconds;
+    
+    return `${minutes}:${seconds}`;
+  }
+
+
 
   render() {
     const { minutes, seconds } = this.state;
@@ -225,11 +243,10 @@ class App extends React.Component {
           </div>
           <div className="topContainer">
             <div id="time-left">
+            {this.state.cycle}
               <h4 class="timer">
-                {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
-              </h4>
-              <h4>
-                
+              {this.convertToTime(this.state.clockCount)}
+                {/* {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "} */}
               </h4>
             </div>
           </div>
