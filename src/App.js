@@ -146,34 +146,29 @@ class App extends React.Component {
   start_break = () => {
     if (this.state.cycle === "break") {
       this.togglePlay();
-      //what I've tried: 
-      //this.state.play === false ? this.audio.pause() : this.audio.play();
-      // this.pause_beep();
-      // setTimeout(this.audio.pause(), 2000)
-      // this.audio.pause()
-      // {this.state.play ? this.pauseSong() : this.playSong()}
-      // this.setState({ play: false });
+
       let label = (document.getElementById("mainLabel").innerHTML =
         "Break Time");
       this.breakTimer = setInterval(() => {
-        const { seconds, minutes, break_length } = this.state;
-        if (seconds > 0) {
-          this.setState(({ seconds }) => ({
-            seconds: seconds - 1,
+        const { secondsB, minutesB, break_length } = this.state;
+        if (secondsB > 0) {
+          this.setState(({ secondsB }) => ({
+            secondsB: secondsB - 1,
           }));
         }
-        if (seconds === 0) {
-          if (break_length === 0) {
+        if (secondsB === 0) {
+          if (minutesB === 0) {
+            this.setState({ cycle: "session" });
             this.start_stop();
             console.log(this.state.session_length)
             clearInterval(this.break_Timer);
           } else {
-            let newMinuteValue = break_length - 1;
-            this.setState(({ minutes }) => ({
-              minutes: newMinuteValue,
-              break_length: newMinuteValue, //we need this here so that it doesn't
+            // let newMinuteValue = break_length - 1;
+            this.setState(({ minutesB }) => ({
+              minutesB: minutesB - 1,
+              // break_length: newMinuteValue, //we need this here so that it doesn't
               //keep resetting the minutes value to the value stored in break_length
-              seconds: 59,
+              secondsB: 59,
             }));
           }
         }
