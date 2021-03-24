@@ -19,6 +19,8 @@ class App extends React.Component {
       seconds: 0,
       cycle: "session",
       countdown: false,
+      minutesB: 1,
+      secondsB: 0,
     };
   }
 
@@ -65,6 +67,7 @@ class App extends React.Component {
     if (this.state.break_length > 0) {
       this.setState({
         break_length: this.state.break_length - 1,
+        minutesB: this.state.break_length - 1,
       });
     }
   };
@@ -73,6 +76,7 @@ class App extends React.Component {
     if (this.state.break_length < 60) {
       this.setState({
         break_length: this.state.break_length + 1,
+        minutesB: this.state.break_length + 1,
       });
     }
   };
@@ -189,7 +193,7 @@ class App extends React.Component {
   };
 
   render() {
-    const { minutes, seconds } = this.state;
+    const { minutes, seconds, minutesB, secondsB } = this.state;
     return (
       <div>
         <div>
@@ -203,6 +207,7 @@ class App extends React.Component {
                 {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "}
               </h4>
               <h4>
+                {minutesB}:{secondsB < 10 ? `0${seconds}` : secondsB}{" "}
                 
               </h4>
             </div>
