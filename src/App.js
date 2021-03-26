@@ -13,7 +13,6 @@ class App extends React.Component {
       break_length: 1,
       session_length: 1,
       minutes: 1,
-      play: false,
       seconds: 0,
       cycle: "session",
       countdown: false,
@@ -23,38 +22,9 @@ class App extends React.Component {
     "https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
   );
 
-  componentDidMount() {
-    this.audio.addEventListener("ended", () => this.setState({ play: false }));
-  }
-
-  componentWillUnmount() {
-    this.audio.removeEventListener("ended", () =>
-      this.setState({ play: false })
-    );
-  }
-
-  togglePlay = () => {
-    this.setState({ play: !this.state.play }, () => {
-      this.state.play ? this.audio.play() : this.audio.pause();
-    });
-  };
-
-  onClick = (button) => {
-    const id = button.target.id;
-
-    if (id === "start_stop") {
-      this.start_stop();
-    } else if (id === "break-decrement") {
-      this.break_decrement();
-    } else if (id === "break-increment") {
-      this.break_increment();
-    } else if (id === "session-decrement") {
-      this.session_decrement();
-    } else if (id === "session-increment") {
-      this.session_increment();
-    } else if (id === "reset") {
-      this.reset();
-    }
+  playAudio = () => {
+    this.audio.play();
+    setTimeout(() => this.audio.pause(), 500);
   };
 
   break_decrement = () => {
@@ -90,84 +60,60 @@ class App extends React.Component {
     }
   };
 
-  start_stop = () => {
-    document.getElementById("mainLabel").innerHTML = "session in progress";
-    if (this.state.countdown === false) {
+  next_cycle = () => {
+    const previousCycleWasSession = this.state.cycle === "session";
+    if (previousCycleWasSession) {
       this.setState({
-        countdown: true,
+        cycle: "break",
+        minutes: this.state.break_length
       });
-
-      this.myInterval = setInterval(() => {
-        const { seconds, minutes } = this.state;
-
-        if (seconds > 0) {
-          this.setState(({ seconds }) => ({
-            seconds: seconds - 1,
-          }));
-        }
-        if (seconds === 0) {
-          if (minutes === 0) {
-            if (this.state.cycle === "session") {
-              this.setState({ cycle: "break" });
-              this.start_break();
-              clearInterval(this.myInterval);
-            }
-          } else {
-            this.setState(({ minutes }) => ({
-              minutes: minutes - 1,
-              seconds: 59,
-            }));
-          }
-        }
-      }, 100);
-    } else if (this.state.countdown === true) {
+      this.playAudio();
+    } else {
       this.setState({
-        countdown: false,
+        cycle: "session",
+        minutes: this.state.session_length
       });
-      {
-        clearInterval(this.myInterval);
-      }
     }
-  };
-
-  pause_beep = () => {
-    this.audio.pause()
   }
 
-  start_break = () => {
-    if (this.state.cycle === "break") {
-      this.togglePlay();
-      this.state.play === false ? this.audio.pause() : this.audio.play();
-      // this.pause_beep();
-      // setTimeout(this.audio.pause(), 2000)
-      // this.audio.pause()
-      // {this.state.play ? this.pauseSong() : this.playSong()}
-      // this.setState({ play: false });
-      let label = (document.getElementById("mainLabel").innerHTML =
-        "Break Time");
-      this.breakTimer = setInterval(() => {
-        const { seconds, minutes, break_length } = this.state;
-        if (seconds > 0) {
-          this.setState(({ seconds }) => ({
-            seconds: seconds - 1,
+  start_timer = (onTimerFinish) => {
+    this.myInterval = setInterval(() => {
+      const { seconds, minutes } = this.state;
+
+      if (seconds > 0) {
+        this.setState(({ seconds }) => ({
+          seconds: seconds - 1,
+        }));
+      }
+      if (seconds === 0) {
+        if (minutes === 0) {
+          onTimerFinish();
+        } else {
+          this.setState(({ minutes }) => ({
+            minutes: minutes - 1,
+            seconds: 59,
           }));
         }
-        if (seconds === 0) {
-          if (break_length === 0) {
-            clearInterval(this.break_Timer);
-          } else {
-            let newMinuteValue = break_length - 1;
-            this.setState(({ minutes }) => ({
-              minutes: newMinuteValue,
-              break_length: newMinuteValue,
-              seconds: 59,
-            }));
-            // this.audio.play()
-          }
-        }
-      }, 100);
+      }
+    }, 100);
+  }
+
+  stop_timer = () => {
+    clearInterval(this.myInterval);
+  }
+
+  start_stop = () => {
+    const shouldPlay = !this.state.countdown;
+
+    if (shouldPlay) {
+      this.start_timer(this.next_cycle);
+    } else {
+      this.stop_timer();
     }
+
+    this.setState({countdown: shouldPlay});
   };
+
 
   reset = () => {
     this.setState({
@@ -181,13 +127,13 @@ class App extends React.Component {
   };
 
   render() {
-    const { minutes, seconds } = this.state;
+    const { minutes, seconds, cycle } = this.state;
     return (
       <div>
         <div>
           <h1 id="page-title">Pomodoro Timer</h1>
           <div id="timer-label">
-            <h2 id="mainLabel"> you got this! </h2>
+            <h2 id="mainLabel">{cycle === "break" ? 'Break Time' : 'Session in progress'}</h2>
           </div>
           <div className="topContainer">
             <div id="time-left">
@@ -200,11 +146,10 @@ class App extends React.Component {
             <button
               id="start_stop"
               class="start"
-              onClick={this.onClick}
-              onClick={this.start_stop.bind(this)}
+              onClick={this.start_stop}
             >
               {" "}
-              Start/Stop
+              {this.state.countdown ? 'Stop' : 'Start'}
             </button>
             <button class="reset" id="reset" onClick={this.onClick}>
               Reset{" "}
@@ -218,33 +163,29 @@ class App extends React.Component {
           </div>
 
           <div className="container">
-            <button id="break-decrement" onClick={this.onClick}>
+            <button id="break-decrement" onClick={this.break_decrement}>
               <FontAwesomeIcon
                 icon={faSortDown}
                 id="iconBdown"
-                onClick={this.break_decrement}
               />
             </button>
-            <button id="break-increment" onClick={this.onClick}>
+            <button id="break-increment" onClick={this.break_increment}>
               <FontAwesomeIcon
                 icon={faSortUp}
                 id="iconBup"
-                onClick={this.break_increment}
               />
             </button>
 
-            <button id="session-decrement" onClick={this.onClick}>
+            <button id="session-decrement" onClick={this.session_decrement}>
               <FontAwesomeIcon
                 icon={faSortDown}
                 id="iconSdown"
-                onClick={this.session_decrement}
               />
             </button>
-            <button id="session-increment" onClick={this.onClick}>
+            <button id="session-increment" onClick={this.session_increment}>
               <FontAwesomeIcon
                 icon={faSortUp}
                 id="iconSup"
-                onClick={this.session_increment}
               />
             </button>
             </div>
