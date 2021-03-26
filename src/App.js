@@ -65,16 +65,16 @@ class App extends React.Component {
     if (previousCycleWasSession) {
       this.setState({
         cycle: "break",
-        minutes: this.state.break_length
+        minutes: this.state.break_length,
       });
       this.playAudio();
     } else {
       this.setState({
         cycle: "session",
-        minutes: this.state.session_length
+        minutes: this.state.session_length,
       });
     }
-  }
+  };
 
   start_timer = (onTimerFinish) => {
     this.myInterval = setInterval(() => {
@@ -96,11 +96,11 @@ class App extends React.Component {
         }
       }
     }, 100);
-  }
+  };
 
   stop_timer = () => {
     clearInterval(this.myInterval);
-  }
+  };
 
   start_stop = () => {
     const shouldPlay = !this.state.countdown;
@@ -111,9 +111,8 @@ class App extends React.Component {
       this.stop_timer();
     }
 
-    this.setState({countdown: shouldPlay});
+    this.setState({ countdown: shouldPlay });
   };
-
 
   reset = () => {
     this.setState({
@@ -133,7 +132,9 @@ class App extends React.Component {
         <div>
           <h1 id="page-title">Pomodoro Timer</h1>
           <div id="timer-label">
-            <h2 id="mainLabel">{cycle === "break" ? 'Break Time' : 'Session in progress'}</h2>
+            <h2 id="mainLabel">
+              {cycle === "break" ? "Break Time" : "Session in progress"}
+            </h2>
           </div>
           <div className="topContainer">
             <div id="time-left">
@@ -143,13 +144,9 @@ class App extends React.Component {
             </div>
           </div>
           <div className="midContainer">
-            <button
-              id="start_stop"
-              class="start"
-              onClick={this.start_stop}
-            >
+            <button id="start_stop" class="start" onClick={this.start_stop}>
               {" "}
-              {this.state.countdown ? 'Stop' : 'Start'}
+              {this.state.countdown ? "Stop" : "Start"}
             </button>
             <button class="reset" id="reset" onClick={this.onClick}>
               Reset{" "}
@@ -164,32 +161,20 @@ class App extends React.Component {
 
           <div className="container">
             <button id="break-decrement" onClick={this.break_decrement}>
-              <FontAwesomeIcon
-                icon={faSortDown}
-                id="iconBdown"
-              />
+              <FontAwesomeIcon icon={faSortDown} id="iconBdown" />
             </button>
             <button id="break-increment" onClick={this.break_increment}>
-              <FontAwesomeIcon
-                icon={faSortUp}
-                id="iconBup"
-              />
+              <FontAwesomeIcon icon={faSortUp} id="iconBup" />
             </button>
 
             <button id="session-decrement" onClick={this.session_decrement}>
-              <FontAwesomeIcon
-                icon={faSortDown}
-                id="iconSdown"
-              />
+              <FontAwesomeIcon icon={faSortDown} id="iconSdown" />
             </button>
             <button id="session-increment" onClick={this.session_increment}>
-              <FontAwesomeIcon
-                icon={faSortUp}
-                id="iconSup"
-              />
+              <FontAwesomeIcon icon={faSortUp} id="iconSup" />
             </button>
-            </div>
-            <div className="labelContainer">
+          </div>
+          <div className="labelContainer">
             <div id="break-length" className="break-label">
               <div id="break-label">
                 {" "}
@@ -201,7 +186,6 @@ class App extends React.Component {
                 Session Length: {this.state.session_length} mins
               </div>
             </div>
-
           </div>
         </div>
       </div>
