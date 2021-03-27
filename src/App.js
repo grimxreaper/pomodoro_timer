@@ -59,38 +59,6 @@ class App extends React.Component {
     }
   };
 
-  // break_decrement = () => {
-  //   if (this.state.break_length > 0) {
-  //     this.setState({
-  //       break_length: this.state.break_length - 1,
-  //     });
-  //   }
-  // };
-
-  // break_increment = () => {
-  //   if (this.state.break_length < 60) {
-  //     this.setState({
-  //       break_length: this.state.break_length + 1,
-  //     });
-  //   }
-  // };
-
-  // session_decrement = () => {
-  //   if (this.state.session_length > 0)
-  //     this.setState({
-  //       session_length: this.state.session_length - 1,
-  //       minutes: this.state.session_length - 1,
-  //     });
-  // };
-
-  // session_increment = () => {
-  //   if (this.state.session_length < 60) {
-  //     this.setState({
-  //       session_length: this.state.session_length + 1,
-  //       minutes: this.state.session_length + 1,
-  //     });
-  //   }
-  // };
 
   handleLengthChange = (count, timerType) => {
     const { session_length, break_length, isPlaying, cycle } = this.state;
@@ -150,76 +118,6 @@ class App extends React.Component {
     }
   };
 
-  //   document.getElementById("mainLabel").innerHTML = "session in progress";
-  //   if (this.state.countdown === false) {
-  //     this.setState({
-  //       countdown: true,
-  //     });
-
-  //     this.myInterval = setInterval(() => {
-  //       const { seconds, minutes } = this.state;
-
-  //       if (seconds > 0) {
-  //         this.setState(({ seconds }) => ({
-  //           seconds: seconds - 1,
-  //         }));
-  //       }
-  //       if (seconds === 0) {
-  //         if (minutes === 0) {
-  //           if (this.state.cycle === "session") {
-  //             this.setState({ cycle: "break" });
-  //             this.start_break();
-  //             clearInterval(this.myInterval);
-  //           }
-  //         } else {
-  //           this.setState(({ minutes }) => ({
-  //             minutes: minutes - 1,
-  //             seconds: 59,
-  //           }));
-  //         }
-  //       }
-  //     }, 100);
-  //   } else if (this.state.countdown === true) {
-  //     this.setState({
-  //       countdown: false,
-  //     });
-  //     {
-  //       clearInterval(this.myInterval);
-  //     }
-  //   }
-  // };
-
-  // start_break = () => {
-  //   if (this.state.cycle === "break") {
-  //     this.togglePlay();
-
-  //     let label = (document.getElementById("mainLabel").innerHTML =
-  //       "Break Time");
-  //     this.breakTimer = setInterval(() => {
-  //       const { seconds, minutes, break_length } = this.state;
-  //       if (seconds > 0) {
-  //         this.setState(({ seconds }) => ({
-  //           seconds: seconds - 1,
-  //         }));
-  //       }
-  //       if (seconds === 0) {
-  //         if (break_length === 0) {
-  //           this.start_stop();
-  //           console.log(this.state.session_length)
-  //           clearInterval(this.break_Timer);
-  //         } else {
-  //           let newMinuteValue = break_length - 1;
-  //           this.setState(({ minutes }) => ({
-  //             minutes: newMinuteValue,
-  //             break_length: newMinuteValue, //we need this here so that it doesn't
-  //             //keep resetting the minutes value to the value stored
-  //             seconds: 59,
-  //           }));
-  //         }
-  //       }
-  //     }, 100);
-  //   }
-  // };
 
   reset = () => {
     clearInterval(this.loop);
@@ -247,14 +145,11 @@ class App extends React.Component {
   render() {
     const { break_length, session_length, cycle, clockCount } = this.state;
 
-    const breakProps = {
-      title: "Break",
-      count: break_length,
-      handleDecrease: () => this.handleLengthChange(-1, "break"),
-      handleIncrease: () => this.handleLengthChange(1, "break"),
-    };
+    const handleDecrease = () => this.handleLengthChange(-1, "break");
+    const handleIncrease = () => this.handleLengthChange(1, "break");
 
     const sessionProps = {
+      things: "rogers", 
       title: "Session",
       count: session_length,
       handleDecrease: () => this.handleLengthChange(-1, "session"),
@@ -268,8 +163,13 @@ class App extends React.Component {
           <h2 id="mainLabel"> you got this! </h2>
         </div>
           <div className="flex">
-            <SetTimer {...breakProps} />
-            <SetTimer {...sessionProps} />
+            <SetTimer
+              things="Jolly"
+              title="Break"
+              count={break_length}
+              handleDecrease={handleDecrease}
+              handleIncrease={handleIncrease} />
+            <SetTimer {...sessionProps}/>
           </div>
 
         <div id="time-left">
@@ -294,92 +194,6 @@ class App extends React.Component {
       </div>
     );
 
-    // return (
-    //   <div>
-    //     <div>
-    //       <h1 id="page-title">Pomodoro Timer</h1>
-    //       <div id="timer-label">
-    //         <h2 id="mainLabel"> you got this! </h2>
-    //       </div>
-    //       <div className="topContainer">
-    //       <div  {...breakProps} />
-    //       <div {...sessionProps} />
-    //         <div id="time-left">
-    //           {this.state.cycle}
-    //           <h4 class="timer">
-    //             {this.convertToTime(this.state.clockCount)}
-    //             {/* {minutes}:{seconds < 10 ? `0${seconds}` : seconds}{" "} */}
-    //           </h4>
-    //         </div>
-    //       </div>
-    //       <div className="midContainer">
-    //         <button
-    //           id="start_stop"
-    //           class="start"
-    //           onClick={this.start_stop}
-    //           onClick={this.start_stop.bind(this)}
-    //         >
-    //           {" "}
-    //           Start/Stop
-    //         </button>
-    //         <button class="reset" id="reset" onClick={this.onClick}>
-    //           Reset{" "}
-    //         </button>
-    //         <audio
-    //           src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
-    //           id="beep"
-    //           ref={this.audio}
-    //           preload="auto"
-    //         />
-    //       </div>
-
-    //       <div className="container">
-    //         <button id="break-decrement" onClick={this.onClick}>
-    //           <FontAwesomeIcon
-    //             icon={faSortDown}
-    //             id="iconBdown"
-    //             onClick={this.break_decrement}
-    //           />
-    //         </button>
-    //         <button id="break-increment" onClick={this.onClick}>
-    //           <FontAwesomeIcon
-    //             icon={faSortUp}
-    //             id="iconBup"
-    //             onClick={this.break_increment}
-    //           />
-    //         </button>
-
-    //         <button id="session-decrement" onClick={this.onClick}>
-    //           <FontAwesomeIcon
-    //             icon={faSortDown}
-    //             id="iconSdown"
-    //             onClick={this.handleDecrease}
-    //           />
-    //         </button>
-    //         <button id="session-increment" onClick={this.onClick}>
-    //           <FontAwesomeIcon
-    //             icon={faSortUp}
-    //             id="iconSup"
-    //             onClick={this.session_increment}
-    //           />
-    //         </button>
-    //       </div>
-    //       <div className="labelContainer">
-    //         <div id="break-length" className="break-label">
-    //           <div id="break-label">
-    //             {" "}
-    //             Break Length: {this.state.break_length} mins
-    //           </div>
-    //         </div>
-    //         <div id="session-length" className="session-label">
-    //           <div id="session-label">
-    //             Session Length: {this.state.session_length} mins
-    //           </div>
-    //         </div>
-    //       </div>
-    //     </div>
-    //   </div>
-    // );
   }
 }
 
@@ -389,6 +203,7 @@ const SetTimer = (props) => {
   return (
     <div className="timer-container">
       <h2 id={`${id}-label`}>{props.title} Length</h2>
+      <h3>{props.things}</h3>
       <div className="flex actions-wrapper">
         <button id={`${id}-decrement`} onClick={props.handleDecrease}>
           <FontAwesomeIcon
@@ -399,7 +214,7 @@ const SetTimer = (props) => {
         </button>
 
         <span id={`${id}-length`}>{props.count}</span>
-
+<h2>{props.things}</h2>
         <button id={`${id}-increment`} onClick={props.handleIncrease}>
           <FontAwesomeIcon
             icon={faSortUp}
